@@ -9,6 +9,9 @@ Inside you can found a special collection of reports, methods and interfaces con
 list of reports:
 - ~~remove special charters~~
 
+interfaces:
+- ~~start/end/expert rotine interface~~
+
 usefull methods for every day development:
 - ~~get end of month~~
 - ~~get mind of month~~
