@@ -7,14 +7,14 @@ Welcome at github BW Toolbox page, fell free to contribute and create pull reque
 Inside you can found a special collection of reports, methods and interfaces containing all necessary tools for daily work in SAP BW.
 
 list of reports:
-- ~~remove special charters
+- ~~remove special charters~~
 
 usefull methods for every day development:
--~~get end of month
-- get mind of month
+-~~get end of month~~
+-~~get mind of month~~
 
 classes speeds up development:
--~~class for ballog handle
+-~~class for ballog handle~~
 
 
 ## How to install
