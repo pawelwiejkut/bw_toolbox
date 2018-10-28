@@ -20,5 +20,5 @@ Clone this repository using [ABAP Git](https://github.com/larshp/abapGit)
 
 ## Naming convention
 
-In this project is used following naming conventions.
+In this project is used following naming conventions:
  
