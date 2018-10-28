@@ -10,7 +10,9 @@ list of reports:
 - ~~remove special charters~~
 
 usefull methods for every day development:
+
 -~~get end of month~~
+
 -~~get mind of month~~
 
 classes speeds up development:
