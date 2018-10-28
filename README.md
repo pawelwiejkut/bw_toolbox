@@ -10,13 +10,11 @@ list of reports:
 - ~~remove special charters~~
 
 usefull methods for every day development:
-
--~~get end of month~~
-
--~~get mind of month~~
+- ~~get end of month~~
+- ~~get mind of month~~
 
 classes speeds up development:
--~~class for ballog handle~~
+- ~~class for ballog handle~~
 
 
 ## How to install
