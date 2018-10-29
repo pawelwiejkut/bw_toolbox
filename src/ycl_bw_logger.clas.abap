@@ -11,4 +11,7 @@ ENDCLASS.
 
 
 CLASS ycl_bw_logger IMPLEMENTATION.
+
+
+
 ENDCLASS.
