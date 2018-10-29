@@ -6,6 +6,15 @@ CLASS ycl_bw_tools DEFINITION
 
   PUBLIC SECTION.
 
+    TYPES:
+      BEGIN OF ty_paramv,
+        param TYPE string,
+        value TYPE string,
+      END OF ty_paramv .
+
+    TYPES:
+      t_ty_paramv TYPE STANDARD TABLE OF ty_paramv .
+
     "! <p class="shorttext synchronized" lang="en">Get end of month date</p>
     "!
     "! @parameter iv_date | <p class="shorttext synchronized" lang="en">Date using to get end of month from</p>
@@ -24,18 +33,66 @@ CLASS ycl_bw_tools DEFINITION
       RETURNING VALUE(rv_cb_opened) TYPE boolean
       RAISING   ycx_bw_error.
 
+    CLASS-METHODS run_function_module
+      IMPORTING
+        !iv_funcna TYPE string
+        !it_param  TYPE t_ty_paramv.
+
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS YCL_BW_TOOLS IMPLEMENTATION.
+CLASS ycl_bw_tools IMPLEMENTATION.
+
+  METHOD run_function_module.
+
+    TYPES: BEGIN OF  t_itab,
+             parameter TYPE string,
+             structure TYPE string,
+             object    TYPE REF TO cl_abap_datadescr,
+           END OF t_itab.
+
+    DATA: lt_params TYPE STANDARD TABLE OF t_itab,
+          lt_imppar TYPE abap_func_parmbind_tab,
+          ls_imppar TYPE abap_func_parmbind,
+          lr_data   TYPE REF TO data.
+
+    SELECT parameter, structure
+    FROM fupararef
+    INTO CORRESPONDING FIELDS OF TABLE @lt_params
+    WHERE funcname = @iv_funcna.
+
+    LOOP AT lt_params ASSIGNING FIELD-SYMBOL(<ls_params>).
+      <ls_params>-object ?= cl_abap_datadescr=>describe_by_name( <ls_params>-structure ).
+    ENDLOOP.
+
+    LOOP AT it_param ASSIGNING FIELD-SYMBOL(<ls_parval>).
+
+      ls_imppar-kind = abap_func_importing.
+      ls_imppar-name = <ls_parval>-param.
+      READ TABLE lt_params WITH KEY parameter = <ls_parval>-param ASSIGNING FIELD-SYMBOL(<lr_object>).
+
+      CREATE DATA lr_data TYPE HANDLE <lr_object>-object.
+      ASSIGN lr_data->* TO FIELD-SYMBOL(<lv_object>).
+
+      <lv_object> =  <ls_parval>-value.
+
+      ls_imppar-value = REF #( <lv_object> ).
+
+      INSERT ls_imppar INTO TABLE lt_imppar.
+
+    ENDLOOP.
+
+    CALL FUNCTION iv_funcna PARAMETER-TABLE lt_imppar.
+
+  ENDMETHOD.
 
 
   METHOD check_open_file_auth.
 
-  rv_cb_opened = abap_true.
+    rv_cb_opened = abap_true.
 
     TRY.
         OPEN DATASET iv_path FOR OUTPUT IN BINARY MODE.
