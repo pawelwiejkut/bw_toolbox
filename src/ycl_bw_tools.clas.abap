@@ -33,10 +33,22 @@ CLASS ycl_bw_tools DEFINITION
       RETURNING VALUE(rv_cb_opened) TYPE boolean
       RAISING   ycx_bw_error.
 
+    "! <p class="shorttext synchronized" lang="en">Dynamic run of function module</p>
+    "!
+    "! @parameter iv_funcna | <p class="shorttext synchronized" lang="en">Function name</p>
+    "! @parameter it_param | <p class="shorttext synchronized" lang="en">Parameter name and value</p>
     CLASS-METHODS run_function_module
       IMPORTING
         !iv_funcna TYPE string
         !it_param  TYPE t_ty_paramv.
+
+    "! <p class="shorttext synchronized" lang="en">Remove whitespace from string</p>
+    "!
+    "! @parameter iv_string | <p class="shorttext synchronized" lang="en">String contains white space</p>
+    "! @parameter rv_cstring | <p class="shorttext synchronized" lang="en">Cleared string</p>
+    CLASS-METHODS remove_whitespaces
+      IMPORTING !iv_string        TYPE string
+      RETURNING VALUE(rv_cstring) TYPE string.
 
   PROTECTED SECTION.
   PRIVATE SECTION.
@@ -59,32 +71,35 @@ CLASS ycl_bw_tools IMPLEMENTATION.
           ls_imppar TYPE abap_func_parmbind,
           lr_data   TYPE REF TO data.
 
+    "Get importing parameters and it's structure of function module
     SELECT parameter, structure
     FROM fupararef
     INTO CORRESPONDING FIELDS OF TABLE @lt_params
     WHERE funcname = @iv_funcna.
 
+    "Assign reference to all object
     LOOP AT lt_params ASSIGNING FIELD-SYMBOL(<ls_params>).
       <ls_params>-object ?= cl_abap_datadescr=>describe_by_name( <ls_params>-structure ).
     ENDLOOP.
 
+    "Create parameter table
     LOOP AT it_param ASSIGNING FIELD-SYMBOL(<ls_parval>).
 
       ls_imppar-kind = abap_func_importing.
       ls_imppar-name = <ls_parval>-param.
+      "Get reference and create data
       READ TABLE lt_params WITH KEY parameter = <ls_parval>-param ASSIGNING FIELD-SYMBOL(<lr_object>).
-
+      CHECK <lr_object> IS NOT INITIAL.
       CREATE DATA lr_data TYPE HANDLE <lr_object>-object.
       ASSIGN lr_data->* TO FIELD-SYMBOL(<lv_object>).
-
+      "Assign value passed from import parameters to field symbol
       <lv_object> =  <ls_parval>-value.
-
       ls_imppar-value = REF #( <lv_object> ).
 
       INSERT ls_imppar INTO TABLE lt_imppar.
 
     ENDLOOP.
-
+    "Call every function with every parameter
     CALL FUNCTION iv_funcna PARAMETER-TABLE lt_imppar.
 
   ENDMETHOD.
@@ -124,4 +139,13 @@ CLASS ycl_bw_tools IMPLEMENTATION.
     ENDIF.
 
   ENDMETHOD.
+
+  METHOD remove_whitespaces.
+
+    DATA(lv_string) = iv_string.
+    REPLACE ALL OCCURRENCES OF REGEX '[[:blank:]]' IN lv_string WITH ''.
+    rv_cstring = lv_string.
+
+  ENDMETHOD.
+
 ENDCLASS.
