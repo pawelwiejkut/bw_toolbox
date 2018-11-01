@@ -30,6 +30,12 @@
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CLSNAME>YCL_BW_TOOLS</CLSNAME>
+     <CMPNAME>REMOVE_NEWLINE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Remove newline charters from string</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>YCL_BW_TOOLS</CLSNAME>
      <CMPNAME>REMOVE_WHITESPACES</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Remove whitespace from string</DESCRIPT>

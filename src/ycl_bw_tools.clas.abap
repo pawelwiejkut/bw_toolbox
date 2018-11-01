@@ -50,6 +50,15 @@ CLASS ycl_bw_tools DEFINITION
       IMPORTING !iv_string        TYPE string
       RETURNING VALUE(rv_cstring) TYPE string.
 
+    "! <p class="shorttext synchronized" lang="en">Remove newline charters from string</p>
+    "!
+    "! @parameter iv_string | <p class="shorttext synchronized" lang="en">String contains newline charters</p>
+    "! @parameter rv_cstring | <p class="shorttext synchronized" lang="en">Cleared string</p>
+    CLASS-METHODS remove_newline
+      IMPORTING !iv_string        TYPE string
+      RETURNING VALUE(rv_cstring) TYPE string.
+
+
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
@@ -144,6 +153,16 @@ CLASS ycl_bw_tools IMPLEMENTATION.
 
     DATA(lv_string) = iv_string.
     REPLACE ALL OCCURRENCES OF REGEX '[[:blank:]]' IN lv_string WITH ''.
+    rv_cstring = lv_string.
+
+  ENDMETHOD.
+
+  METHOD remove_newline.
+
+  DATA(lv_string) = iv_string.
+    REPLACE ALL OCCURRENCES OF REGEX '\n' IN lv_string WITH ''.
+    REPLACE ALL OCCURRENCES OF REGEX '\r' IN lv_string WITH ''.
+    REPLACE ALL OCCURRENCES OF cl_abap_char_utilities=>newline IN lv_string WITH ''.
     rv_cstring = lv_string.
 
   ENDMETHOD.
