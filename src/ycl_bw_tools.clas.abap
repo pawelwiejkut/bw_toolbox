@@ -65,7 +65,64 @@ ENDCLASS.
 
 
 
-CLASS ycl_bw_tools IMPLEMENTATION.
+CLASS YCL_BW_TOOLS IMPLEMENTATION.
+
+
+  METHOD check_open_file_auth.
+
+    rv_cb_opened = abap_true.
+
+    TRY.
+        OPEN DATASET iv_path FOR OUTPUT IN BINARY MODE.
+        IF sy-subrc <> 0.
+          rv_cb_opened = abap_false.
+        ENDIF.
+      CATCH cx_sy_file_authority.
+        rv_cb_opened = abap_false.
+      CATCH cx_root.
+        rv_cb_opened = abap_false.
+        RAISE EXCEPTION TYPE ycx_bw_error.
+    ENDTRY.
+
+  ENDMETHOD.
+
+
+  METHOD get_eom_date.
+
+    CALL FUNCTION 'SLS_MISC_GET_LAST_DAY_OF_MONTH'
+      EXPORTING
+        day_in            = iv_date
+      IMPORTING
+        last_day_of_month = rv_eom
+      EXCEPTIONS
+        day_in_not_valid  = 1
+        OTHERS            = 2.
+    IF sy-subrc <> 0.
+      RAISE EXCEPTION TYPE ycx_bw_error.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD remove_newline.
+
+  DATA(lv_string) = iv_string.
+    REPLACE ALL OCCURRENCES OF REGEX '\n' IN lv_string WITH ''.
+    REPLACE ALL OCCURRENCES OF REGEX '\r' IN lv_string WITH ''.
+    REPLACE ALL OCCURRENCES OF cl_abap_char_utilities=>newline IN lv_string WITH ''.
+    rv_cstring = lv_string.
+
+  ENDMETHOD.
+
+
+  METHOD remove_whitespaces.
+
+    DATA(lv_string) = iv_string.
+    REPLACE ALL OCCURRENCES OF REGEX '[[:blank:]]' IN lv_string WITH ''.
+    rv_cstring = lv_string.
+
+  ENDMETHOD.
+
 
   METHOD run_function_module.
 
@@ -112,59 +169,4 @@ CLASS ycl_bw_tools IMPLEMENTATION.
     CALL FUNCTION iv_funcna PARAMETER-TABLE lt_imppar.
 
   ENDMETHOD.
-
-
-  METHOD check_open_file_auth.
-
-    rv_cb_opened = abap_true.
-
-    TRY.
-        OPEN DATASET iv_path FOR OUTPUT IN BINARY MODE.
-        IF sy-subrc <> 0.
-          rv_cb_opened = abap_false.
-        ENDIF.
-      CATCH cx_sy_file_authority.
-        rv_cb_opened = abap_false.
-      CATCH cx_root.
-        rv_cb_opened = abap_false.
-        RAISE EXCEPTION TYPE ycx_bw_error.
-    ENDTRY.
-
-  ENDMETHOD.
-
-
-  METHOD get_eom_date.
-
-    CALL FUNCTION 'SLS_MISC_GET_LAST_DAY_OF_MONTH'
-      EXPORTING
-        day_in            = iv_date
-      IMPORTING
-        last_day_of_month = rv_eom
-      EXCEPTIONS
-        day_in_not_valid  = 1
-        OTHERS            = 2.
-    IF sy-subrc <> 0.
-      RAISE EXCEPTION TYPE ycx_bw_error.
-    ENDIF.
-
-  ENDMETHOD.
-
-  METHOD remove_whitespaces.
-
-    DATA(lv_string) = iv_string.
-    REPLACE ALL OCCURRENCES OF REGEX '[[:blank:]]' IN lv_string WITH ''.
-    rv_cstring = lv_string.
-
-  ENDMETHOD.
-
-  METHOD remove_newline.
-
-  DATA(lv_string) = iv_string.
-    REPLACE ALL OCCURRENCES OF REGEX '\n' IN lv_string WITH ''.
-    REPLACE ALL OCCURRENCES OF REGEX '\r' IN lv_string WITH ''.
-    REPLACE ALL OCCURRENCES OF cl_abap_char_utilities=>newline IN lv_string WITH ''.
-    rv_cstring = lv_string.
-
-  ENDMETHOD.
-
 ENDCLASS.
