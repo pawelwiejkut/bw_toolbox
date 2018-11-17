@@ -13,7 +13,8 @@ interfaces:
 - ~~start/end/expert rotine interface~~
 
 usefull methods for every day development:
-- ~~get end of month~~
+- get end of month
+- check request status
 - ~~get mind of month~~
 
 classes speeds up development:
