@@ -15,6 +15,7 @@ interfaces:
 usefull methods for every day development:
 - get end of month
 - check request status
+- get
 - ~~get mind of month~~
 
 classes speeds up development:
