@@ -25,7 +25,7 @@ CLASS ltcl_tools_tesing IMPLEMENTATION.
   METHOD open_file_auth_test.
 
     cl_abap_unit_assert=>assert_equals( act = ycl_bw_tools=>check_open_file_auth(
-                                                                 iv_path      = '/usr/sap/NPL/D00/work/available.log')
+                                                                 iv_path      = '/usr/sap/NPL/D00/work/available.log' )
                                                                  exp = abap_true ).
 
 
