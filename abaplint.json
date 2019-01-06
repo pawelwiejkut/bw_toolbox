@@ -1,0 +1,92 @@
+{
+  "global": {
+    "version": "v751",
+    "skipGeneratedGatewayClasses": true
+  },
+  "rules": {
+    "7bit_ascii": {
+      "enabled": true
+    },
+    "contains_tab": {
+      "enabled": true
+    },
+    "functional_writing": {
+      "enabled": true,
+      "ignoreExceptions": true
+    },
+    "line_length": {
+      "enabled": true,
+      "length": 130
+    },
+    "max_one_statement": {
+      "enabled": true
+    },
+    "parser_error": {
+      "enabled": true
+    },
+    "space_before_colon": {
+      "enabled": true
+    },
+    "colon_missing_space": {
+      "enabled": true
+    },
+    "exit_or_check": {
+      "enabled": true
+    },
+    "line_only_punc": {
+      "enabled": true,
+      "ignoreExceptions": true
+    },
+    "obsolete_statement": {
+      "enabled": true,
+      "refresh": true,
+      "compute": true,
+      "add": true,
+      "subtract": true,
+      "multiply": true,
+      "move": true,
+      "divide": true,
+      "requested": true
+    },
+    "start_at_tab": {
+      "enabled": true
+    },
+    "whitespace_end": {
+      "enabled": true
+    },
+    "exporting": {
+      "enabled": true
+    },
+    "empty_statement": {
+      "enabled": true
+    },
+    "sequential_blank": {
+      "enabled": true,
+      "lines": 4
+    },
+    "definitions_top": {
+      "enabled": true
+    },
+    "breakpoint": {
+      "enabled": true
+    },
+    "nesting": {
+      "enabled": true,
+      "depth": 5
+    },
+    "keywords_upper": {
+      "enabled": true,
+      "ignoreExceptions": true
+    },
+    "cloud_types": {
+      "enabled": true
+    },
+    "method_length": {
+      "enabled": true,
+      "statements": 100
+    },
+    "mix_returning": {
+      "enabled": true
+    }
+  }
+}
