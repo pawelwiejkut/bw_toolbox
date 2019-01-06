@@ -1,5 +1,7 @@
 # BW Toolbox 📊 🔨 📦
 
+[![codecov](https://codecov.io/gh/pawelwiejkut/bw_toolbox/branch/master/graph/badge.svg)](https://codecov.io/gh/pawelwiejkut/bw_toolbox)
+
 Welcome at github BW Toolbox page, fell free to contribute and create pull requests.
 
 ## What is inside ?
