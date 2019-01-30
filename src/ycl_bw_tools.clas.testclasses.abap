@@ -7,7 +7,8 @@ CLASS ltcl_tools_tesing DEFINITION FINAL FOR TESTING
       get_eom_test FOR TESTING RAISING cx_static_check,
       open_file_auth_test FOR TESTING RAISING cx_static_check,
       remove_whitespaces_test FOR TESTING RAISING cx_static_check,
-      remove_newline_test FOR TESTING RAISING cx_static_check.
+      remove_newline_test FOR TESTING RAISING cx_static_check,
+      check_statistics_test FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -40,10 +41,33 @@ CLASS ltcl_tools_tesing IMPLEMENTATION.
 
   METHOD remove_newline_test.
 
-  DATA(lv_tsring) = |test{ cl_abap_char_utilities=>newline }|.
+    DATA(lv_tsring) = |test{ cl_abap_char_utilities=>newline }|.
 
-  cl_abap_unit_assert=>assert_equals( act = ycl_bw_tools=>remove_newline( iv_string = lv_tsring )
-                                                                                exp = 'test' ).
+    cl_abap_unit_assert=>assert_equals( act = ycl_bw_tools=>remove_newline( iv_string = lv_tsring )
+                                                                                  exp = 'test' ).
+
+  ENDMETHOD.
+
+  METHOD check_statistics_test.
+
+    DATA ls_date TYPE RANGE OF sy-datum.
+
+    ls_date = VALUE #( ( sign = 'I' option = 'BT' low = '20180101' high = '99999999' ) ).
+
+    ycl_bw_tools=>check_statistics( EXPORTING
+                                    is_date = ls_date
+                                    iv_processchain = 'TEST_PC'
+                                    iv_variant = 'ZPAK_BY40S1EJACIMADX9V3D2SKQH1'
+                                    IMPORTING
+                                    es_stats = DATA(ls_stats) ).
+
+
+    cl_abap_unit_assert=>assert_equals(
+      EXPORTING
+        act                  =  ls_stats
+        exp                  =  ls_stats
+
+    ).
 
   ENDMETHOD.
 

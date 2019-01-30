@@ -13,7 +13,18 @@ CLASS ycl_bw_tools DEFINITION
       END OF ty_paramv .
 
     TYPES:
-      t_ty_paramv TYPE STANDARD TABLE OF ty_paramv .
+      BEGIN OF ty_pcstat,
+        chain_id       TYPE string,
+        variante       TYPE string,
+        starttimestamp TYPE timestamp,
+        endtimestamp   TYPE timestamp,
+        runtime        TYPE integer,
+      END OF ty_pcstat.
+
+    TYPES:
+      t_ty_paramv TYPE STANDARD TABLE OF ty_paramv,
+      t_ty_pcstat TYPE STANDARD TABLE OF ty_pcstat,
+      t_rdate     TYPE RANGE OF sy-datum.
 
     "! <p class="shorttext synchronized" lang="en">Get end of month date</p>
     "!
@@ -58,6 +69,28 @@ CLASS ycl_bw_tools DEFINITION
       IMPORTING !iv_string        TYPE string
       RETURNING VALUE(rv_cstring) TYPE string.
 
+    "! <p class="shorttext synchronized" lang="en">Check ustate status of request</p>
+    "!
+    "! @parameter iv_requid | <p class="shorttext synchronized" lang="en"></p>
+    "! @parameter rv_status | <p class="shorttext synchronized" lang="en"></p>
+    CLASS-METHODS check_req_status
+      IMPORTING !iv_requid       TYPE rsbkrequid
+      RETURNING VALUE(rv_status) TYPE  rsbkustate.
+
+    "! <p class="shorttext synchronized" lang="en">Check process chain statistics</p>
+    "!
+    "! @parameter iv_variant | <p class="shorttext synchronized" lang="en"></p>
+    "! @parameter iv_processchain | <p class="shorttext synchronized" lang="en"></p>
+    "! @parameter is_date | <p class="shorttext synchronized" lang="en"></p>
+    "! @parameter et_stats | <p class="shorttext synchronized" lang="en"></p>
+    "! @parameter es_stats | <p class="shorttext synchronized" lang="en"></p>
+    CLASS-METHODS check_statistics
+      IMPORTING !iv_variant      TYPE string
+                !iv_processchain TYPE string
+                !is_date         TYPE t_rdate
+      EXPORTING et_stats         TYPE t_ty_pcstat
+                es_stats         TYPE ty_pcstat.
+
 
   PROTECTED SECTION.
   PRIVATE SECTION.
@@ -65,64 +98,7 @@ ENDCLASS.
 
 
 
-CLASS YCL_BW_TOOLS IMPLEMENTATION.
-
-
-  METHOD check_open_file_auth.
-
-    rv_cb_opened = abap_true.
-
-    TRY.
-        OPEN DATASET iv_path FOR OUTPUT IN BINARY MODE.
-        IF sy-subrc <> 0.
-          rv_cb_opened = abap_false.
-        ENDIF.
-      CATCH cx_sy_file_authority.
-        rv_cb_opened = abap_false.
-      CATCH cx_root.
-        rv_cb_opened = abap_false.
-        RAISE EXCEPTION TYPE ycx_bw_error.
-    ENDTRY.
-
-  ENDMETHOD.
-
-
-  METHOD get_eom_date.
-
-    CALL FUNCTION 'SLS_MISC_GET_LAST_DAY_OF_MONTH'
-      EXPORTING
-        day_in            = iv_date
-      IMPORTING
-        last_day_of_month = rv_eom
-      EXCEPTIONS
-        day_in_not_valid  = 1
-        OTHERS            = 2.
-    IF sy-subrc <> 0.
-      RAISE EXCEPTION TYPE ycx_bw_error.
-    ENDIF.
-
-  ENDMETHOD.
-
-
-  METHOD remove_newline.
-
-  DATA(lv_string) = iv_string.
-    REPLACE ALL OCCURRENCES OF REGEX '\n' IN lv_string WITH ''.
-    REPLACE ALL OCCURRENCES OF REGEX '\r' IN lv_string WITH ''.
-    REPLACE ALL OCCURRENCES OF cl_abap_char_utilities=>newline IN lv_string WITH ''.
-    rv_cstring = lv_string.
-
-  ENDMETHOD.
-
-
-  METHOD remove_whitespaces.
-
-    DATA(lv_string) = iv_string.
-    REPLACE ALL OCCURRENCES OF REGEX '[[:blank:]]' IN lv_string WITH ''.
-    rv_cstring = lv_string.
-
-  ENDMETHOD.
-
+CLASS ycl_bw_tools IMPLEMENTATION.
 
   METHOD run_function_module.
 
@@ -169,4 +145,114 @@ CLASS YCL_BW_TOOLS IMPLEMENTATION.
     CALL FUNCTION iv_funcna PARAMETER-TABLE lt_imppar.
 
   ENDMETHOD.
+
+
+  METHOD check_open_file_auth.
+
+    rv_cb_opened = abap_true.
+
+    TRY.
+        OPEN DATASET iv_path FOR OUTPUT IN BINARY MODE.
+        IF sy-subrc <> 0.
+          rv_cb_opened = abap_false.
+        ENDIF.
+      CATCH cx_sy_file_authority.
+        rv_cb_opened = abap_false.
+      CATCH cx_root.
+        rv_cb_opened = abap_false.
+        RAISE EXCEPTION TYPE ycx_bw_error.
+    ENDTRY.
+
+  ENDMETHOD.
+
+
+  METHOD get_eom_date.
+
+    CALL FUNCTION 'SLS_MISC_GET_LAST_DAY_OF_MONTH'
+      EXPORTING
+        day_in            = iv_date
+      IMPORTING
+        last_day_of_month = rv_eom
+      EXCEPTIONS
+        day_in_not_valid  = 1
+        OTHERS            = 2.
+    IF sy-subrc <> 0.
+      RAISE EXCEPTION TYPE ycx_bw_error.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD remove_whitespaces.
+
+    DATA(lv_string) = iv_string.
+    REPLACE ALL OCCURRENCES OF REGEX '[[:blank:]]' IN lv_string WITH ''.
+    rv_cstring = lv_string.
+
+  ENDMETHOD.
+
+  METHOD remove_newline.
+
+    DATA(lv_string) = iv_string.
+    REPLACE ALL OCCURRENCES OF REGEX '\n' IN lv_string WITH ''.
+    REPLACE ALL OCCURRENCES OF REGEX '\r' IN lv_string WITH ''.
+    REPLACE ALL OCCURRENCES OF cl_abap_char_utilities=>newline IN lv_string WITH ''.
+    rv_cstring = lv_string.
+
+  ENDMETHOD.
+
+  METHOD check_req_status.
+
+    DATA lobj_req TYPE REF TO cl_rsbk_request.
+
+    lobj_req = NEW #( i_requid  =  iv_requid ) .
+
+    rv_status = lobj_req->get_ustate( ).
+
+  ENDMETHOD.
+
+  METHOD check_statistics.
+
+
+    SELECT chain_id,chain~variante,starttimestamp,endtimestamp
+    INTO TABLE @et_stats
+    FROM rspcchain AS chain
+    INNER JOIN rspcprocesslog AS log
+    ON chain~variante = log~variante
+    WHERE chain~chain_id = @iv_processchain
+    AND chain~variante = @iv_variant
+    AND log~batchdate IN @is_date
+    AND chain~objvers = 'A'.
+
+    LOOP AT et_stats ASSIGNING FIELD-SYMBOL(<ls_stats>).
+
+      TRY.
+          cl_abap_tstmp=>subtract(
+            EXPORTING
+              tstmp1                     =  <ls_stats>-endtimestamp
+              tstmp2                     =  <ls_stats>-starttimestamp
+            RECEIVING
+              r_secs                     =  <ls_stats>-runtime
+          ).
+
+          <ls_stats>-runtime  = <ls_stats>-runtime  / 60.
+
+        CATCH cx_parameter_invalid_range.    "TO-DO Log message
+
+        CATCH cx_parameter_invalid_type.    "TO-DO Log message
+
+      ENDTRY.
+
+      AT LAST.
+        MOVE <ls_stats> TO es_stats.
+      ENDAT.
+
+    ENDLOOP.
+
+    DATA(lv_avg) = REDUCE i( INIT a = 0 FOR ls_stats IN et_stats
+                         NEXT a = a + ls_stats-runtime ) / lines( et_stats ).
+
+    es_stats-runtime = lv_avg.
+
+  ENDMETHOD.
+
 ENDCLASS.
