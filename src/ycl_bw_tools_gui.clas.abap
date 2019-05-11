@@ -14,7 +14,6 @@ ENDCLASS.
 
 CLASS ycl_bw_tools_gui IMPLEMENTATION.
 
-
   METHOD change_request_status.
     CALL FUNCTION 'RSBM_GUI_CHANGE_USTATE'
       EXPORTING
