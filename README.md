@@ -12,7 +12,7 @@ list of reports:
 - ~~remove special charters~~
 
 interfaces:
-- ~~start/end/expert rotine interface~~larshp/abapGit
+- ~~start/end/expert rotine interface~~
 
 usefull methods for every day development:
 - get end of month
@@ -28,7 +28,7 @@ classes speeds up development:
 
 Clone this repository using [ABAP Git](https://github.com/larshp/abapGit)
 
-## Naming convention
+## ~~Naming convention~~
 
-In this project is used following naming conventions:
+No longer required, refactor in progress. New requirements described in: [this repo](https://github.com/SAP/styleguides/blob/master/clean-abap/CleanABAP.md)
  
