@@ -16,10 +16,12 @@ CLASS ltcl_tools_tesing IMPLEMENTATION.
 
   METHOD get_eom_test.
 
-    DATA: lv_ceom TYPE sy-datum.
+    DATA: lv_ceom         TYPE sy-datum,
+          lv_date_example TYPE sy-datum.
+    lv_date_example = '20181129'.
     lv_ceom = '20181130'.
 
-    cl_abap_unit_assert=>assert_equals( act = ycl_bw_tools=>get_eom_date( sy-datum )
+    cl_abap_unit_assert=>assert_equals( act = ycl_bw_tools=>get_eom_date( lv_date_example )
                                         exp = lv_ceom ).
   ENDMETHOD.
 

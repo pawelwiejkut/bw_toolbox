@@ -1,4 +1,4 @@
-"! <p class="shorttext synchronized" lang="en">BW Tools</p>
+"! <p class="shorttext synchronized" lang="en">BW Toolbox</p>
 CLASS ycl_bw_tools DEFINITION
   PUBLIC
   FINAL
