@@ -19,6 +19,7 @@ usefull methods for every day development:
 - get end of month
 - check request status
 - check open file authorization
+- check process chain statistics
 - ~~get mind of month~~
 
 classes speeds up development:
