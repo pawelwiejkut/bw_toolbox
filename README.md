@@ -12,14 +12,17 @@ list of reports:
 - ~~remove special charters~~
 
 interfaces:
-- ~~start/end/expert rotine interface~~
+- start~~/end/expert~~rotine interface
 
 usefull methods for every day development:
 - get end of month
 - check request status
 - check open file authorization
 - check process chain statistics
-- ~~get mind of month~~
+- run function module
+- remove whitespace
+- remove newline char
+
 
 classes speeds up development:
 - ~~class for ballog handle~~
