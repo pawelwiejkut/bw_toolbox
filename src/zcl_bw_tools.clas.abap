@@ -90,13 +90,6 @@ CLASS zcl_bw_tools DEFINITION
                 !it_date         TYPE ty_rdate
       EXPORTING et_stats         TYPE ty_t_pcstat
                 es_stats         TYPE ty_pcstat.
-*
-*  CLASS-METHODS oh_merge_header
-*   IMPORTING !iv_fiename   TYPE string
-*        !iv_header_name TYPE string.
-
-
-
 
   PROTECTED SECTION.
   PRIVATE SECTION.
@@ -159,11 +152,10 @@ CLASS zcl_bw_tools IMPLEMENTATION.
             tstmp2           = <ls_stats>-starttimestamp ).
 
           <ls_stats>-runtime = <ls_stats>-runtime / lc_minute.
-
-        CATCH cx_parameter_invalid_range.  """to-do Log message
-
-        CATCH cx_parameter_invalid_type.  """to-do Log message
-
+        "to-do Log message
+        CATCH cx_parameter_invalid_range.
+        "to-do Log message
+        CATCH cx_parameter_invalid_type.
       ENDTRY.
 
       AT LAST.
@@ -213,13 +205,13 @@ CLASS zcl_bw_tools IMPLEMENTATION.
 
   METHOD run_function_module.
 
-    TYPES: BEGIN OF t_itab,
+    TYPES: BEGIN OF ty_t_itab,
              parameter TYPE string,
              structure TYPE string,
              object    TYPE REF TO cl_abap_datadescr,
-           END OF t_itab.
+           END OF ty_t_itab.
 
-    DATA: lt_params TYPE STANDARD TABLE OF t_itab,
+    DATA: lt_params TYPE STANDARD TABLE OF ty_t_itab,
           lt_imppar TYPE abap_func_parmbind_tab,
           ls_imppar TYPE abap_func_parmbind,
           lr_data   TYPE REF TO data.
