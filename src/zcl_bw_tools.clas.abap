@@ -128,7 +128,7 @@ CLASS zcl_bw_tools IMPLEMENTATION.
 
   METHOD check_req_status.
 
-    DATA lo_req TYPE REF TO cl_rsbk_request.
+    DATA: lo_req TYPE REF TO cl_rsbk_request.
 
     lo_req = NEW #( i_requid = iv_requid ) .
 
@@ -160,9 +160,9 @@ CLASS zcl_bw_tools IMPLEMENTATION.
 
           <ls_stats>-runtime = <ls_stats>-runtime / lc_minute.
 
-        CATCH cx_parameter_invalid_range.  ""TO-DO Log message
+        CATCH cx_parameter_invalid_range.  """to-do Log message
 
-        CATCH cx_parameter_invalid_type.  ""TO-DO Log message
+        CATCH cx_parameter_invalid_type.  """to-do Log message
 
       ENDTRY.
 
