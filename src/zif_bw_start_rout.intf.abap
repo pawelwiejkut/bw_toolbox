@@ -1,4 +1,4 @@
-INTERFACE yif_bw_start_rout
+INTERFACE zif_bw_start_rout
   PUBLIC .
 
   METHODS

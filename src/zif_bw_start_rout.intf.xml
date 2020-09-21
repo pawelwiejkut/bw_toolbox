@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOINTERF>
-    <CLSNAME>YIF_BW_TOOLS</CLSNAME>
+    <CLSNAME>ZIF_BW_START_ROUT</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>BW Tools Interface</DESCRIPT>
+    <DESCRIPT>Start routine interface for SAP BW</DESCRIPT>
     <EXPOSURE>2</EXPOSURE>
     <STATE>1</STATE>
     <UNICODE>X</UNICODE>

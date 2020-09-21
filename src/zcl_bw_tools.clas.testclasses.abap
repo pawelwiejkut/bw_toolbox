@@ -21,13 +21,13 @@ CLASS ltcl_tools_tesing IMPLEMENTATION.
     lv_date_example = '20181129'.
     lv_ceom = '20181130'.
 
-    cl_abap_unit_assert=>assert_equals( act = ycl_bw_tools=>get_eom_date( lv_date_example )
+    cl_abap_unit_assert=>assert_equals( act = zcl_bw_tools=>get_eom_date( lv_date_example )
                                         exp = lv_ceom ).
   ENDMETHOD.
 
   METHOD open_file_auth_test.
 
-    cl_abap_unit_assert=>assert_equals( act = ycl_bw_tools=>check_open_file_auth(
+    cl_abap_unit_assert=>assert_equals( act = zcl_bw_tools=>check_open_file_auth(
       iv_path      = '/usr/sap/NPL/D00/work/available.log' )
       exp = abap_true ).
 
@@ -36,7 +36,7 @@ CLASS ltcl_tools_tesing IMPLEMENTATION.
 
   METHOD remove_whitespaces_test.
 
-    cl_abap_unit_assert=>assert_equals( act = ycl_bw_tools=>remove_whitespaces(
+    cl_abap_unit_assert=>assert_equals( act = zcl_bw_tools=>remove_whitespaces(
       iv_string = '      test'  )
       exp = 'test' ).
 
@@ -46,7 +46,7 @@ CLASS ltcl_tools_tesing IMPLEMENTATION.
 
     DATA(lv_tsring) = |test{ cl_abap_char_utilities=>newline }|.
 
-    cl_abap_unit_assert=>assert_equals( act = ycl_bw_tools=>remove_newline(
+    cl_abap_unit_assert=>assert_equals( act = zcl_bw_tools=>remove_newline(
       iv_string = lv_tsring )
       exp = 'test' ).
 
@@ -58,7 +58,7 @@ CLASS ltcl_tools_tesing IMPLEMENTATION.
 
     lt_date = VALUE #( ( sign = 'I' option = 'BT' low = '20180101' high = '99999999' ) ).
 
-    ycl_bw_tools=>check_statistics( EXPORTING
+    zcl_bw_tools=>check_statistics( EXPORTING
                                     it_date = lt_date
                                     iv_processchain = 'TEST_PC'
                                     iv_variant = 'ZPAK_BY40S1EJACIMADX9V3D2SKQH1'

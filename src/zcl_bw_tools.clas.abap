@@ -1,5 +1,5 @@
 "! <p class="shorttext synchronized" lang="en">BW Toolbox</p>
-CLASS ycl_bw_tools DEFINITION
+CLASS zcl_bw_tools DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC .
@@ -33,7 +33,7 @@ CLASS ycl_bw_tools DEFINITION
     CLASS-METHODS  get_eom_date
       IMPORTING !iv_date      TYPE sy-datum
       RETURNING VALUE(rv_eom) TYPE sy-datum
-      RAISING   ycx_bw_error.
+      RAISING   zcx_bw_error.
 
     "! <p class="shorttext synchronized" lang="en">Check authorization for file open</p>
     "!
@@ -42,7 +42,7 @@ CLASS ycl_bw_tools DEFINITION
     CLASS-METHODS check_open_file_auth
       IMPORTING !iv_path            TYPE string
       RETURNING VALUE(rv_cb_opened) TYPE boolean
-      RAISING   ycx_bw_error.
+      RAISING   zcx_bw_error.
 
     "! <p class="shorttext synchronized" lang="en">Dynamic run of function module</p>
     "!
@@ -81,7 +81,7 @@ CLASS ycl_bw_tools DEFINITION
     "!
     "! @parameter iv_variant | <p class="shorttext synchronized" lang="en"></p>
     "! @parameter iv_processchain | <p class="shorttext synchronized" lang="en"></p>
-    "! @parameter is_date | <p class="shorttext synchronized" lang="en"></p>
+    "! @parameter it_date | <p class="shorttext synchronized" lang="en"></p>
     "! @parameter et_stats | <p class="shorttext synchronized" lang="en"></p>
     "! @parameter es_stats | <p class="shorttext synchronized" lang="en"></p>
     CLASS-METHODS check_statistics
@@ -90,6 +90,12 @@ CLASS ycl_bw_tools DEFINITION
                 !it_date         TYPE t_rdate
       EXPORTING et_stats         TYPE t_ty_pcstat
                 es_stats         TYPE ty_pcstat.
+*
+*    CLASS-METHODS oh_merge_header
+*      IMPORTING !iv_fiename     TYPE string
+*                !iv_header_name TYPE string.
+
+
 
 
   PROTECTED SECTION.
@@ -98,7 +104,7 @@ ENDCLASS.
 
 
 
-CLASS ycl_bw_tools IMPLEMENTATION.
+CLASS zcl_bw_tools IMPLEMENTATION.
 
 
   METHOD check_open_file_auth.
@@ -114,7 +120,7 @@ CLASS ycl_bw_tools IMPLEMENTATION.
         rv_cb_opened = abap_false.
       CATCH cx_root.
         rv_cb_opened = abap_false.
-        RAISE EXCEPTION TYPE ycx_bw_error.
+        RAISE EXCEPTION TYPE zcx_bw_error.
     ENDTRY.
 
   ENDMETHOD.

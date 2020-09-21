@@ -1,4 +1,4 @@
-CLASS ycl_bw_tools_gui DEFINITION
+CLASS zcl_bw_tools_gui DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC .
@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS ycl_bw_tools_gui IMPLEMENTATION.
+CLASS zcl_bw_tools_gui IMPLEMENTATION.
 
   METHOD change_request_status.
     CALL FUNCTION 'RSBM_GUI_CHANGE_USTATE'

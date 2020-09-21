@@ -1,4 +1,4 @@
-CLASS ycx_bw_error DEFINITION
+CLASS zcx_bw_error DEFINITION
   PUBLIC
   INHERITING FROM cx_static_check
   FINAL
@@ -19,7 +19,7 @@ ENDCLASS.
 
 
 
-CLASS ycx_bw_error IMPLEMENTATION.
+CLASS zcx_bw_error IMPLEMENTATION.
 
 
   METHOD constructor ##ADT_SUPPRESS_GENERATION.
