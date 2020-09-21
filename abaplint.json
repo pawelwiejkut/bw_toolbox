@@ -166,6 +166,7 @@
         },
         "parser_missing_space": true,
         "identical_conditions": true,
-        "prefer_is_not": true
+        "prefer_is_not": true,
+        "remove_descriptions": false
     }
 }
