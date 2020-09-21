@@ -87,6 +87,9 @@
     },
     "mix_returning": {
       "enabled": true
+    },
+    "remove_descriptions": {
+      "enabled": false
     }
   }
 }
