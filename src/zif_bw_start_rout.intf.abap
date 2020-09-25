@@ -11,8 +11,7 @@ INTERFACE zif_bw_start_rout
   "! @parameter et_source_package | <p class="shorttext synchronized" lang="en">Source package outcome</p>
   "! @raising cx_rsrout_abort | <p class="shorttext synchronized" lang="en">Abort exception</p>
   "! @raising cx_rsbk_errorcount | <p class="shorttext synchronized" lang="en">Error count exception</p>
-  METHODS
-    start
+  METHODS start
       IMPORTING
         iv_request        TYPE rsrequest
         iv_datapackid     TYPE rsdatapid
