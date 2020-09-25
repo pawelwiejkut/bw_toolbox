@@ -19,20 +19,9 @@ usefull methods for every day development:
 - check request status
 - check open file authorization
 - check process chain statistics
-- run function module
 - remove whitespace
 - remove newline char
 
-
-classes speeds up development:
-- ~~class for ballog handle~~
-
-
 ## How to install
-
 Clone this repository using [ABAP Git](https://github.com/larshp/abapGit)
 
-## ~~Naming convention~~
-
-No longer required, refactor in progress. New requirements described in: [this repo](https://github.com/SAP/styleguides/blob/master/clean-abap/CleanABAP.md)
- 
