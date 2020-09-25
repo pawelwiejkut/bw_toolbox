@@ -1,6 +1,16 @@
 INTERFACE zif_bw_start_rout
   PUBLIC .
 
+  "! <p class="shorttext synchronized" lang="en">Start routine for BW transformations</p>
+  "!
+  "! @parameter iv_request | <p class="shorttext synchronized" lang="en"> Request ID</p>
+  "! @parameter iv_datapackid | <p class="shorttext synchronized" lang="en">Data package ID </p>
+  "! @parameter iv_segid | <p class="shorttext synchronized" lang="en"></p>
+  "! @parameter it_source_package | <p class="shorttext synchronized" lang="en">Source package income</p>
+  "! @parameter et_monitor | <p class="shorttext synchronized" lang="en">Monitor</p>
+  "! @parameter et_source_package | <p class="shorttext synchronized" lang="en">Source package outcome</p>
+  "! @raising cx_rsrout_abort | <p class="shorttext synchronized" lang="en">Abort exception</p>
+  "! @raising cx_rsbk_errorcount | <p class="shorttext synchronized" lang="en">Error count exception</p>
   METHODS
     start
       IMPORTING

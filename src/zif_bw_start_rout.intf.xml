@@ -10,6 +10,14 @@
     <STATE>1</STATE>
     <UNICODE>X</UNICODE>
    </VSEOINTERF>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_BW_START_ROUT</CLSNAME>
+     <CMPNAME>START</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Start routine for BW transformations</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
   </asx:values>
  </asx:abap>
 </abapGit>

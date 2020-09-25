@@ -10,7 +10,7 @@ CLASS zcl_bw_tools DEFINITION
       BEGIN OF ty_paramv,
         param TYPE string,
         value TYPE string,
-      END OF ty_paramv .
+      END OF ty_paramv.
 
     TYPES:
       BEGIN OF ty_pcstat,
@@ -121,9 +121,7 @@ CLASS zcl_bw_tools IMPLEMENTATION.
 
   METHOD check_req_status.
 
-    DATA: lo_req TYPE REF TO cl_rsbk_request.
-
-    lo_req = NEW #( i_requid = iv_requid ) .
+    DATA(lo_req) = NEW cl_rsbk_request( i_requid = iv_requid ).
 
     rv_status = lo_req->get_ustate( ).
 
@@ -230,7 +228,7 @@ CLASS zcl_bw_tools IMPLEMENTATION.
     "Create parameter table
     LOOP AT it_param ASSIGNING FIELD-SYMBOL(<ls_parval>).
 
-      ls_imppar-kind = abap_func_importing.
+      ls_imppar-kind = 20.
       ls_imppar-name = <ls_parval>-param.
       "Get reference and create data
       READ TABLE lt_params WITH KEY parameter = <ls_parval>-param ASSIGNING FIELD-SYMBOL(<ls_object>).
