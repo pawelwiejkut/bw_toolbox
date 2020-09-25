@@ -154,7 +154,7 @@
         "sql_escape_host_variables": true,
         "try_without_catch": true,
         "names_no_dash": true,
-        "unknown_types": true,
+        "unknown_types": false,
         "unused_variables": true,
         "unused_types": true,
         "use_bool_expression": true,
