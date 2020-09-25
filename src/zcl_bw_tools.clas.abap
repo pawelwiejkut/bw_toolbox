@@ -96,7 +96,6 @@ CLASS zcl_bw_tools DEFINITION
 ENDCLASS.
 
 
-
 CLASS zcl_bw_tools IMPLEMENTATION.
 
 
