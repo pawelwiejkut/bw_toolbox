@@ -149,7 +149,7 @@
         "check_no_handler_pragma": true,
         "line_break_multiple_parameters": true,
         "prefer_inline":{
-            "exclude": [],
+            "exclude": ["/src/zcl_bw_tools.clas.testclasses.abap"],
             "severity": "Warning"
         },
         "reduce_string_templates": true,
