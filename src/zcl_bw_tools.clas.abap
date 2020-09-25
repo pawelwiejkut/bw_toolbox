@@ -237,6 +237,9 @@ CLASS zcl_bw_tools IMPLEMENTATION.
       CHECK <ls_object> IS NOT INITIAL.
       CREATE DATA lr_data TYPE HANDLE <ls_object>-object.
       ASSIGN lr_data->* TO FIELD-SYMBOL(<lg_object>).
+      IF sy-subrc <> 0.
+        EXIT.
+      ENDIF.
       "Assign value passed from import parameters to field symbol
       <lg_object> = <ls_parval>-value.
       ls_imppar-value = REF #( <lg_object> ).
