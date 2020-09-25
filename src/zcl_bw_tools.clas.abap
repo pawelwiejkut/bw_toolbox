@@ -44,8 +44,6 @@ CLASS zcl_bw_tools DEFINITION
       RETURNING VALUE(rv_cb_opened) TYPE boolean
       RAISING   zcx_bw_error.
 
-
-
     "! <p class="shorttext synchronized" lang="en">Remove whitespace from string</p>
     "!
     "! @parameter iv_string | <p class="shorttext synchronized" lang="en">String contains white space</p>
