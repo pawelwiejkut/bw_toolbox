@@ -149,9 +149,9 @@ CLASS zcl_bw_tools IMPLEMENTATION.
             tstmp2           = <ls_stats>-starttimestamp ).
 
           <ls_stats>-runtime = <ls_stats>-runtime / lc_minute.
-        "to-do Log message
+          "to-do Log message
         CATCH cx_parameter_invalid_range.
-        "to-do Log message
+          "to-do Log message
         CATCH cx_parameter_invalid_type.
       ENDTRY.
 
@@ -231,6 +231,9 @@ CLASS zcl_bw_tools IMPLEMENTATION.
       ls_imppar-name = <ls_parval>-param.
       "Get reference and create data
       READ TABLE lt_params WITH KEY parameter = <ls_parval>-param ASSIGNING FIELD-SYMBOL(<ls_object>).
+      IF sy-subrc <> 0.
+        EXIT.
+      ENDIF.
       CHECK <ls_object> IS NOT INITIAL.
       CREATE DATA lr_data TYPE HANDLE <ls_object>-object.
       ASSIGN lr_data->* TO FIELD-SYMBOL(<lg_object>).

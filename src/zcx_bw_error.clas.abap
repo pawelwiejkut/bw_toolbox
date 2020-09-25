@@ -19,9 +19,7 @@ CLASS zcx_bw_error DEFINITION
 ENDCLASS.
 
 
-
 CLASS zcx_bw_error IMPLEMENTATION.
-
 
   METHOD constructor ##ADT_SUPPRESS_GENERATION.
     CALL METHOD super->constructor
