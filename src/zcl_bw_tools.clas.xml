@@ -49,12 +49,6 @@
      <LANGU>E</LANGU>
      <DESCRIPT>Remove whitespace from string</DESCRIPT>
     </SEOCOMPOTX>
-    <SEOCOMPOTX>
-     <CLSNAME>ZCL_BW_TOOLS</CLSNAME>
-     <CMPNAME>RUN_FUNCTION_MODULE</CMPNAME>
-     <LANGU>E</LANGU>
-     <DESCRIPT>Dynamic run of function module</DESCRIPT>
-    </SEOCOMPOTX>
    </DESCRIPTIONS>
   </asx:values>
  </asx:abap>

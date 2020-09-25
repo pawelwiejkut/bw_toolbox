@@ -44,14 +44,7 @@ CLASS zcl_bw_tools DEFINITION
       RETURNING VALUE(rv_cb_opened) TYPE boolean
       RAISING   zcx_bw_error.
 
-    "! <p class="shorttext synchronized" lang="en">Dynamic run of function module</p>
-    "!
-    "! @parameter iv_funcna | <p class="shorttext synchronized" lang="en">Function name</p>
-    "! @parameter it_param | <p class="shorttext synchronized" lang="en">Parameter name and value</p>
-    CLASS-METHODS run_function_module
-      IMPORTING
-        !iv_funcna TYPE string
-        !it_param  TYPE ty_t_paramv.
+
 
     "! <p class="shorttext synchronized" lang="en">Remove whitespace from string</p>
     "!
@@ -197,53 +190,6 @@ CLASS zcl_bw_tools IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF REGEX '[[:blank:]]' IN lv_string WITH ''.
     rv_cstring = lv_string.
 
-  ENDMETHOD.
-
-
-  METHOD run_function_module.
-
-    TYPES: BEGIN OF ty_t_itab,
-             parameter TYPE string,
-             structure TYPE string,
-             object    TYPE REF TO cl_abap_datadescr,
-           END OF ty_t_itab.
-
-    DATA: lt_params TYPE STANDARD TABLE OF ty_t_itab,
-          lt_imppar TYPE abap_func_parmbind_tab,
-          ls_imppar TYPE abap_func_parmbind,
-          lr_data   TYPE REF TO data.
-
-    "Get importing parameters and it's structure of function module
-    SELECT parameter, structure
-     FROM fupararef
-     INTO CORRESPONDING FIELDS OF TABLE @lt_params
-     WHERE funcname = @iv_funcna.
-
-    "Assign reference to all object
-    LOOP AT lt_params ASSIGNING FIELD-SYMBOL(<ls_params>).
-      <ls_params>-object ?= cl_abap_datadescr=>describe_by_name( <ls_params>-structure ).
-    ENDLOOP.
-
-    "Create parameter table
-    LOOP AT it_param ASSIGNING FIELD-SYMBOL(<ls_parval>).
-      ls_imppar-kind = 20.
-      ls_imppar-name = <ls_parval>-param.
-      "Get reference and create data
-      READ TABLE lt_params WITH KEY parameter = <ls_parval>-param ASSIGNING FIELD-SYMBOL(<ls_object>).
-      IF sy-subrc <> 0.EXIT.ENDIF.
-
-      CREATE DATA lr_data TYPE HANDLE <ls_object>-object.
-      ASSIGN lr_data->* TO FIELD-SYMBOL(<lg_object>).
-      IF sy-subrc <> 0.EXIT. ENDIF.
-      "Assign value passed from import parameters to field symbol
-
-      <lg_object> = <ls_parval>-value.
-      ls_imppar-value = REF #( <lg_object> ).
-      INSERT ls_imppar INTO TABLE lt_imppar.
-    ENDLOOP.
-
-    "Call every function with every parameter
-    CALL FUNCTION iv_funcna PARAMETER-TABLE lt_imppar.
   ENDMETHOD.
 
 ENDCLASS.
