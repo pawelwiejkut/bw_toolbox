@@ -226,29 +226,24 @@ CLASS zcl_bw_tools IMPLEMENTATION.
 
     "Create parameter table
     LOOP AT it_param ASSIGNING FIELD-SYMBOL(<ls_parval>).
-
       ls_imppar-kind = 20.
       ls_imppar-name = <ls_parval>-param.
       "Get reference and create data
       READ TABLE lt_params WITH KEY parameter = <ls_parval>-param ASSIGNING FIELD-SYMBOL(<ls_object>).
-      IF sy-subrc <> 0.
-        EXIT.
-      ENDIF.
-      CHECK <ls_object> IS NOT INITIAL.
+      IF sy-subrc <> 0.EXIT.ENDIF.
+
       CREATE DATA lr_data TYPE HANDLE <ls_object>-object.
       ASSIGN lr_data->* TO FIELD-SYMBOL(<lg_object>).
-      IF sy-subrc <> 0.
-        EXIT.
-      ENDIF.
+      IF sy-subrc <> 0.EXIT. ENDIF.
       "Assign value passed from import parameters to field symbol
+
       <lg_object> = <ls_parval>-value.
       ls_imppar-value = REF #( <lg_object> ).
-
       INSERT ls_imppar INTO TABLE lt_imppar.
-
     ENDLOOP.
+
     "Call every function with every parameter
     CALL FUNCTION iv_funcna PARAMETER-TABLE lt_imppar.
-
   ENDMETHOD.
+
 ENDCLASS.
