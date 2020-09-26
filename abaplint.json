@@ -81,7 +81,7 @@
             "withHeaderLine": true,
             "fieldSymbolStructure": true
         },
-        "parser_error": true,
+        "parser_error": false,
         "preferred_compare_operator": {
             "badOperators": [
                 "EQ",
@@ -148,10 +148,7 @@
         },
         "check_no_handler_pragma": true,
         "line_break_multiple_parameters": true,
-        "prefer_inline":{
-            "exclude": ["/src/zcl_bw_tools.clas.testclasses.abap"],
-            "severity": "Warning"
-        },
+        "prefer_inline":false,
         "reduce_string_templates": true,
         "sicf_consistency": true,
         "sql_escape_host_variables": true,
