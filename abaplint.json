@@ -81,7 +81,7 @@
             "withHeaderLine": true,
             "fieldSymbolStructure": true
         },
-        "parser_error": false,
+        "parser_error": true,
         "preferred_compare_operator": {
             "badOperators": [
                 "EQ",
