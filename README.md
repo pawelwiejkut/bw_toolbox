@@ -8,13 +8,15 @@ Welcome at github BW Toolbox page, fell free to contribute and create pull reque
 
 Inside you can found a special collection of reports, methods and interfaces containing all necessary tools for daily work in SAP BW.
 
-list of reports:
-- ~~remove special charters~~
+-main report with aggregation of usefull standard reports:
+
+![Screenshot](https://i.imgur.com/b3fRaoL.png)
+Format: ![Alt Text](url)
 
 interfaces:
-- start~~/end/expert~~rotine interface
+- start/end rotine interface
 
-usefull methods for every day development:
+methods for every day development:
 - get end of month
 - check request status
 - check open file authorization
