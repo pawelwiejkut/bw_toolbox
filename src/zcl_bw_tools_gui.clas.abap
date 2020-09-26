@@ -19,7 +19,7 @@ CLASS zcl_bw_tools_gui IMPLEMENTATION.
           lv_return TYPE string,
           lv_reqid  TYPE rsbkrequid.
 
-    APPEND VALUE #( tabname = to_upper('rsddstatdtp') fieldname = to_upper('requid')  ) TO lt_fields.
+    APPEND VALUE #( tabname = to_upper( 'rsddstatdtp' ) fieldname = to_upper( 'requid' ) ) TO lt_fields.
 
     CALL FUNCTION 'POPUP_GET_VALUES'
       EXPORTING
