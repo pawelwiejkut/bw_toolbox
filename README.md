@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/pawelwiejkut/bw_toolbox.svg?branch=master)](https://travis-ci.com/pawelwiejkut/bw_toolbox)
 
+[![YourActionName Actions Status](https://github.com/pawelwiejkut/bw_toolbox/workflows/CI/badge.svg)](https://github.com/pawelwiejkut/bw_toolbox/actions)
+
 Welcome at github BW Toolbox page, fell free to contribute and create pull requests.
 
 ## What is inside ?
