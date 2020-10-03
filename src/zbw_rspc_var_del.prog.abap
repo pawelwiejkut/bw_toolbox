@@ -6,9 +6,7 @@
 REPORT zbw_rspc_var_del.
 
 DATA:
-  lv_varaint TYPE rspc_variant,
-  l_s_text   TYPE rspcvariantt,
-  l_answer.
+  lv_varaint TYPE rspc_variant.
 
 PARAMETERS: pa_type TYPE rspc_type.
 SELECT-OPTIONS pa_var  FOR lv_varaint NO INTERVALS.
@@ -23,8 +21,6 @@ LOOP AT pa_var REFERENCE INTO DATA(lr_var).
                WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4
                RAISING aborted.
   ENDIF.
-
-  l_r_variant->get_info( IMPORTING e_s_rspcvariantt = l_s_text ).
 
   l_r_variant->delete(  ).
 
