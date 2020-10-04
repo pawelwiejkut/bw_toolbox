@@ -27,7 +27,9 @@ PARAMETERS:
   "re-import objects rsdg_after_import_for_corr
   pa_reimp RADIOBUTTON GROUP rad2,
   "delete process chain variant zbw_rspc_var_del
-  pa_dpvar RADIOBUTTON GROUP rad2.
+  pa_dpvar RADIOBUTTON GROUP rad2,
+  "start rspc zbw_rspc_start
+  pa_srsp  RADIOBUTTON GROUP rad2.
 
 SELECTION-SCREEN END OF SCREEN 102.
 
@@ -67,6 +69,9 @@ END-OF-SELECTION.
 
     ELSEIF pa_dpvar = abap_true.
       SUBMIT zbw_rspc_var_del VIA SELECTION-SCREEN AND RETURN.
+
+    ELSEIF pa_srsp = abap_true.
+      SUBMIT zbw_rspc_start VIA SELECTION-SCREEN AND RETURN.
 
     ENDIF.
   ENDIF.
