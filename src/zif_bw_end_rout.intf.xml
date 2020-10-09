@@ -13,7 +13,7 @@
    <DESCRIPTIONS>
     <SEOCOMPOTX>
      <CLSNAME>ZIF_BW_END_ROUT</CLSNAME>
-     <CMPNAME>START</CMPNAME>
+     <CMPNAME>END</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>End routine for BW transformations</DESCRIPT>
     </SEOCOMPOTX>
