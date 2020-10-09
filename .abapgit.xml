@@ -12,6 +12,7 @@
     <item>/package.json</item>
     <item>/.travis.yml</item>
     <item>/abaplint.json</item>
+    <item>/CONTRIBUTING.md</item>
    </IGNORE>
   </DATA>
  </asx:values>

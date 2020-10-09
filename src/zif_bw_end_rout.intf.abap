@@ -7,11 +7,11 @@ INTERFACE zif_bw_end_rout
   "! @parameter iv_datapackid | <p class="shorttext synchronized" lang="en">Data package ID </p>
   "! @parameter iv_segid | <p class="shorttext synchronized" lang="en"></p>
   "! @parameter it_result_package | <p class="shorttext synchronized" lang="en">Result package income</p>
+  "! @parameter ir_request | <p class="shorttext synchronized" lang="en">Request reference</p>
   "! @parameter et_monitor | <p class="shorttext synchronized" lang="en">Monitor</p>
   "! @parameter et_result_package | <p class="shorttext synchronized" lang="en">Result package outcome</p>
   "! @raising cx_rsrout_abort | <p class="shorttext synchronized" lang="en">Abort exception</p>
   "! @raising cx_rsbk_errorcount | <p class="shorttext synchronized" lang="en">Error count exception</p>
-
   METHODS end
     IMPORTING
       iv_request        TYPE rsrequest OPTIONAL
