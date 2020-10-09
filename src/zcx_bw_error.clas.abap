@@ -1,4 +1,4 @@
-CLASS ycx_bw_error DEFINITION
+CLASS zcx_bw_error DEFINITION
   PUBLIC
   INHERITING FROM cx_static_check
   FINAL
@@ -9,6 +9,7 @@ CLASS ycx_bw_error DEFINITION
     INTERFACES if_t100_dyn_msg .
     INTERFACES if_t100_message .
 
+    "! <p class="shorttext synchronized" lang="en">CONSTRUCTOR</p>
     METHODS constructor
       IMPORTING
         !textid   LIKE if_t100_message=>t100key OPTIONAL
@@ -18,9 +19,7 @@ CLASS ycx_bw_error DEFINITION
 ENDCLASS.
 
 
-
-CLASS ycx_bw_error IMPLEMENTATION.
-
+CLASS zcx_bw_error IMPLEMENTATION.
 
   METHOD constructor ##ADT_SUPPRESS_GENERATION.
     CALL METHOD super->constructor

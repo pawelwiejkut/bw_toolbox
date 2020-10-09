@@ -3,14 +3,22 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOCLASS>
-    <CLSNAME>YCL_BW_LOGGER</CLSNAME>
+    <CLSNAME>ZCL_BW_TOOLS_GUI</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>Log application information</DESCRIPT>
+    <DESCRIPT>GUI methods for bw toolbox</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
     <UNICODE>X</UNICODE>
    </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_BW_TOOLS_GUI</CLSNAME>
+     <CMPNAME>CHANGE_REQUEST_STATUS</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Change DTP request status</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
   </asx:values>
  </asx:abap>
 </abapGit>

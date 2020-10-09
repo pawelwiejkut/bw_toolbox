@@ -3,13 +3,21 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOINTERF>
-    <CLSNAME>YIF_BW_TOOLS</CLSNAME>
+    <CLSNAME>ZIF_BW_END_ROUT</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>BW Tools Interface</DESCRIPT>
+    <DESCRIPT>Start routine interface for SAP BW</DESCRIPT>
     <EXPOSURE>2</EXPOSURE>
     <STATE>1</STATE>
     <UNICODE>X</UNICODE>
    </VSEOINTERF>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_BW_END_ROUT</CLSNAME>
+     <CMPNAME>START</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>End routine for BW transformations</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
   </asx:values>
  </asx:abap>
 </abapGit>

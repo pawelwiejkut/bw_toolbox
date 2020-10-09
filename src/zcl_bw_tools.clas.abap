@@ -1,8 +1,8 @@
 "! <p class="shorttext synchronized" lang="en">BW Toolbox</p>
-CLASS ycl_bw_tools DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+CLASS zcl_bw_tools DEFINITION
+ PUBLIC
+ FINAL
+ CREATE PUBLIC .
 
   PUBLIC SECTION.
 
@@ -10,7 +10,7 @@ CLASS ycl_bw_tools DEFINITION
       BEGIN OF ty_paramv,
         param TYPE string,
         value TYPE string,
-      END OF ty_paramv .
+      END OF ty_paramv.
 
     TYPES:
       BEGIN OF ty_pcstat,
@@ -22,18 +22,18 @@ CLASS ycl_bw_tools DEFINITION
       END OF ty_pcstat.
 
     TYPES:
-      t_ty_paramv TYPE STANDARD TABLE OF ty_paramv,
-      t_ty_pcstat TYPE STANDARD TABLE OF ty_pcstat,
-      t_rdate     TYPE RANGE OF sy-datum.
+      ty_t_paramv TYPE STANDARD TABLE OF ty_paramv,
+      ty_t_pcstat TYPE STANDARD TABLE OF ty_pcstat,
+      ty_rdate    TYPE RANGE OF sy-datum.
 
     "! <p class="shorttext synchronized" lang="en">Get end of month date</p>
     "!
     "! @parameter iv_date | <p class="shorttext synchronized" lang="en">Date using to get end of month from</p>
-    "! @parameter rv_eom  | <p class="shorttext synchronized" lang="en">End of month date return</p>
-    CLASS-METHODS  get_eom_date
+    "! @parameter rv_eom | <p class="shorttext synchronized" lang="en">End of month date return</p>
+    CLASS-METHODS get_eom_date
       IMPORTING !iv_date      TYPE sy-datum
       RETURNING VALUE(rv_eom) TYPE sy-datum
-      RAISING   ycx_bw_error.
+      RAISING   zcx_bw_error.
 
     "! <p class="shorttext synchronized" lang="en">Check authorization for file open</p>
     "!
@@ -42,16 +42,7 @@ CLASS ycl_bw_tools DEFINITION
     CLASS-METHODS check_open_file_auth
       IMPORTING !iv_path            TYPE string
       RETURNING VALUE(rv_cb_opened) TYPE boolean
-      RAISING   ycx_bw_error.
-
-    "! <p class="shorttext synchronized" lang="en">Dynamic run of function module</p>
-    "!
-    "! @parameter iv_funcna | <p class="shorttext synchronized" lang="en">Function name</p>
-    "! @parameter it_param | <p class="shorttext synchronized" lang="en">Parameter name and value</p>
-    CLASS-METHODS run_function_module
-      IMPORTING
-        !iv_funcna TYPE string
-        !it_param  TYPE t_ty_paramv.
+      RAISING   zcx_bw_error.
 
     "! <p class="shorttext synchronized" lang="en">Remove whitespace from string</p>
     "!
@@ -75,30 +66,28 @@ CLASS ycl_bw_tools DEFINITION
     "! @parameter rv_status | <p class="shorttext synchronized" lang="en"></p>
     CLASS-METHODS check_req_status
       IMPORTING !iv_requid       TYPE rsbkrequid
-      RETURNING VALUE(rv_status) TYPE  rsbkustate.
+      RETURNING VALUE(rv_status) TYPE rsbkustate.
 
     "! <p class="shorttext synchronized" lang="en">Check process chain statistics</p>
     "!
     "! @parameter iv_variant | <p class="shorttext synchronized" lang="en"></p>
     "! @parameter iv_processchain | <p class="shorttext synchronized" lang="en"></p>
-    "! @parameter is_date | <p class="shorttext synchronized" lang="en"></p>
+    "! @parameter it_date | <p class="shorttext synchronized" lang="en"></p>
     "! @parameter et_stats | <p class="shorttext synchronized" lang="en"></p>
     "! @parameter es_stats | <p class="shorttext synchronized" lang="en"></p>
     CLASS-METHODS check_statistics
       IMPORTING !iv_variant      TYPE string
                 !iv_processchain TYPE string
-                !it_date         TYPE t_rdate
-      EXPORTING et_stats         TYPE t_ty_pcstat
+                !it_date         TYPE ty_rdate
+      EXPORTING et_stats         TYPE ty_t_pcstat
                 es_stats         TYPE ty_pcstat.
-
 
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
 
 
-
-CLASS ycl_bw_tools IMPLEMENTATION.
+CLASS zcl_bw_tools IMPLEMENTATION.
 
 
   METHOD check_open_file_auth.
@@ -114,7 +103,7 @@ CLASS ycl_bw_tools IMPLEMENTATION.
         rv_cb_opened = abap_false.
       CATCH cx_root.
         rv_cb_opened = abap_false.
-        RAISE EXCEPTION TYPE ycx_bw_error.
+        RAISE EXCEPTION TYPE zcx_bw_error.
     ENDTRY.
 
   ENDMETHOD.
@@ -122,9 +111,7 @@ CLASS ycl_bw_tools IMPLEMENTATION.
 
   METHOD check_req_status.
 
-    DATA lo_req TYPE REF TO cl_rsbk_request.
-
-    lo_req = NEW #( i_requid  =  iv_requid ) .
+    DATA(lo_req) = NEW cl_rsbk_request( i_requid = iv_requid ).
 
     rv_status = lo_req->get_ustate( ).
 
@@ -136,28 +123,27 @@ CLASS ycl_bw_tools IMPLEMENTATION.
 
 
     SELECT chain_id,chain~variante,starttimestamp,endtimestamp
-      INTO CORRESPONDING FIELDS OF TABLE @et_stats
-      FROM rspcchain AS chain
-      INNER JOIN rspcprocesslog AS log
-      ON chain~variante = log~variante
-      WHERE chain~chain_id = @iv_processchain
-      AND chain~variante = @iv_variant
-      AND log~batchdate IN @it_date
-      AND chain~objvers = 'A'.
+     INTO CORRESPONDING FIELDS OF TABLE @et_stats
+     FROM rspcchain AS chain
+     INNER JOIN rspcprocesslog AS log
+     ON chain~variante = log~variante
+     WHERE chain~chain_id = @iv_processchain
+     AND chain~variante = @iv_variant
+     AND log~batchdate IN @it_date
+     AND chain~objvers = 'A'.
 
     LOOP AT et_stats ASSIGNING FIELD-SYMBOL(<ls_stats>).
 
       TRY.
           <ls_stats>-runtime = cl_abap_tstmp=>subtract(
-              tstmp1                     =  <ls_stats>-endtimestamp
-              tstmp2                     =  <ls_stats>-starttimestamp ).
+            tstmp1           = <ls_stats>-endtimestamp
+            tstmp2           = <ls_stats>-starttimestamp ).
 
-          <ls_stats>-runtime  = <ls_stats>-runtime  / lc_minute.
-
-        CATCH cx_parameter_invalid_range.    "TO-DO Log message
-
-        CATCH cx_parameter_invalid_type.    "TO-DO Log message
-
+          <ls_stats>-runtime = <ls_stats>-runtime / lc_minute.
+          "to-do Log message
+        CATCH cx_parameter_invalid_range.
+          "to-do Log message
+        CATCH cx_parameter_invalid_type.
       ENDTRY.
 
       AT LAST.
@@ -167,7 +153,7 @@ CLASS ycl_bw_tools IMPLEMENTATION.
     ENDLOOP.
 
     DATA(lv_avg) = REDUCE i( INIT a = 0 FOR ls_stats IN et_stats
-                         NEXT a = a + ls_stats-runtime ) / lines( et_stats ).
+               NEXT a = a + ls_stats-runtime ) / lines( et_stats ).
 
     es_stats-runtime = lv_avg.
 
@@ -204,50 +190,4 @@ CLASS ycl_bw_tools IMPLEMENTATION.
 
   ENDMETHOD.
 
-
-  METHOD run_function_module.
-
-    TYPES: BEGIN OF  t_itab,
-             parameter TYPE string,
-             structure TYPE string,
-             object    TYPE REF TO cl_abap_datadescr,
-           END OF t_itab.
-
-    DATA: lt_params TYPE STANDARD TABLE OF t_itab,
-          lt_imppar TYPE abap_func_parmbind_tab,
-          ls_imppar TYPE abap_func_parmbind,
-          lr_data   TYPE REF TO data.
-
-    "Get importing parameters and it's structure of function module
-    SELECT parameter, structure
-      FROM fupararef
-      INTO CORRESPONDING FIELDS OF TABLE @lt_params
-      WHERE funcname = @iv_funcna.
-
-    "Assign reference to all object
-    LOOP AT lt_params ASSIGNING FIELD-SYMBOL(<ls_params>).
-      <ls_params>-object ?= cl_abap_datadescr=>describe_by_name( <ls_params>-structure ).
-    ENDLOOP.
-
-    "Create parameter table
-    LOOP AT it_param ASSIGNING FIELD-SYMBOL(<ls_parval>).
-
-      ls_imppar-kind = abap_func_importing.
-      ls_imppar-name = <ls_parval>-param.
-      "Get reference and create data
-      READ TABLE lt_params WITH KEY parameter = <ls_parval>-param ASSIGNING FIELD-SYMBOL(<ls_object>).
-      CHECK <ls_object> IS NOT INITIAL.
-      CREATE DATA lr_data TYPE HANDLE <ls_object>-object.
-      ASSIGN lr_data->* TO FIELD-SYMBOL(<lg_object>).
-      "Assign value passed from import parameters to field symbol
-      <lg_object> =  <ls_parval>-value.
-      ls_imppar-value = REF #( <lg_object> ).
-
-      INSERT ls_imppar INTO TABLE lt_imppar.
-
-    ENDLOOP.
-    "Call every function with every parameter
-    CALL FUNCTION iv_funcna PARAMETER-TABLE lt_imppar.
-
-  ENDMETHOD.
 ENDCLASS.

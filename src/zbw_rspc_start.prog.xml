@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <PROGDIR>
-    <NAME>YBW_TOOLBOX</NAME>
+    <NAME>ZBW_RSPC_START</NAME>
     <DBAPL>S</DBAPL>
     <SUBC>1</SUBC>
     <FIXPT>X</FIXPT>
@@ -12,9 +12,21 @@
    </PROGDIR>
    <TPOOL>
     <item>
+     <ID>I</ID>
+     <KEY>001</KEY>
+     <ENTRY>Process chain started succesfully</ENTRY>
+     <LENGTH>66</LENGTH>
+    </item>
+    <item>
      <ID>R</ID>
-     <ENTRY>Run BW Toolbox methods</ENTRY>
-     <LENGTH>22</LENGTH>
+     <ENTRY>Start process chain</ENTRY>
+     <LENGTH>19</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>PA_CHAIN</KEY>
+     <ENTRY>Process chain name</ENTRY>
+     <LENGTH>26</LENGTH>
     </item>
    </TPOOL>
   </asx:values>
