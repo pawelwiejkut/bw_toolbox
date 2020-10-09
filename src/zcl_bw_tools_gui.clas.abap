@@ -37,7 +37,7 @@ CLASS zcl_bw_tools_gui IMPLEMENTATION.
     ENDIF.
 
     IF lv_return = 'A'.
-     RETURN.
+      RETURN.
     ENDIF.
 
     lv_reqid = lv_return.
