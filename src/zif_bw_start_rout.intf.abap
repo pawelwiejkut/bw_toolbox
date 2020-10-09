@@ -13,9 +13,10 @@ INTERFACE zif_bw_start_rout
   "! @raising cx_rsbk_errorcount | <p class="shorttext synchronized" lang="en">Error count exception</p>
   METHODS start
       IMPORTING
-        iv_request        TYPE rsrequest
-        iv_datapackid     TYPE rsdatapid
-        iv_segid          TYPE rsbk_segid
+        iv_request        TYPE rsrequest OPTIONAL
+        iv_datapackid     TYPE rsdatapid OPTIONAL
+        iv_segid          TYPE rsbk_segid OPTIONAL
+        ir_request        TYPE REF TO if_rsbk_request_admintab_view OPTIONAL
         it_source_package TYPE ANY TABLE
       EXPORTING
         et_monitor        TYPE rstr_ty_t_monitors
