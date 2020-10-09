@@ -11,6 +11,7 @@ INTERFACE zif_bw_end_rout
   "! @parameter et_result_package | <p class="shorttext synchronized" lang="en">Result package outcome</p>
   "! @raising cx_rsrout_abort | <p class="shorttext synchronized" lang="en">Abort exception</p>
   "! @raising cx_rsbk_errorcount | <p class="shorttext synchronized" lang="en">Error count exception</p>
+
   METHODS end
     IMPORTING
       iv_request        TYPE rsrequest OPTIONAL

@@ -1,92 +1,171 @@
 {
-  "global": {
-    "version": "v751",
-    "skipGeneratedGatewayClasses": true
-  },
-  "rules": {
-    "7bit_ascii": {
-      "enabled": true
+    "global": {
+        "files": "/src/**/*.*",
+        "skipGeneratedGatewayClasses": true,
+        "skipGeneratedPersistentClasses": true,
+        "skipGeneratedFunctionGroups": true
     },
-    "contains_tab": {
-      "enabled": true
+    "syntax": {
+        "version": "v753",
+        "errorNamespace": "",
+        "globalConstants": [],
+        "globalMacros": []
     },
-    "functional_writing": {
-      "enabled": true,
-      "ignoreExceptions": true
-    },
-    "line_length": {
-      "enabled": true,
-      "length": 130
-    },
-    "max_one_statement": {
-      "enabled": true
-    },
-    "parser_error": {
-      "enabled": true
-    },
-    "space_before_colon": {
-      "enabled": true
-    },
-    "colon_missing_space": {
-      "enabled": true
-    },
-    "exit_or_check": {
-      "enabled": true
-    },
-    "line_only_punc": {
-      "enabled": true,
-      "ignoreExceptions": true
-    },
-    "obsolete_statement": {
-      "enabled": true,
-      "refresh": true,
-      "compute": true,
-      "add": true,
-      "subtract": true,
-      "multiply": true,
-      "move": true,
-      "divide": true,
-      "requested": true
-    },
-    "start_at_tab": {
-      "enabled": true
-    },
-    "whitespace_end": {
-      "enabled": true
-    },
-    "exporting": {
-      "enabled": true
-    },
-    "empty_statement": {
-      "enabled": true
-    },
-    "sequential_blank": {
-      "enabled": true,
-      "lines": 4
-    },
-    "definitions_top": {
-      "enabled": true
-    },
-    "breakpoint": {
-      "enabled": true
-    },
-    "nesting": {
-      "enabled": true,
-      "depth": 5
-    },
-    "keywords_upper": {
-      "enabled": true,
-      "ignoreExceptions": true
-    },
-    "cloud_types": {
-      "enabled": true
-    },
-    "method_length": {
-      "enabled": true,
-      "statements": 100
-    },
-    "mix_returning": {
-      "enabled": true
+    "dependencies": [
+        {
+            "url": "https://github.com/abaplint/deps",
+            "folder": "/deps",
+            "files": "/src/**/*.*"
+        }
+    ],
+    "rules": {
+        "avoid_use": {
+            "define": true,
+            "endselect": true,
+            "execSQL": true,
+            "kernelCall": true,
+            "communication": true,
+            "statics": true,
+            "systemCall": true,
+            "break": true,
+            "defaultKey": true
+        },
+        "commented_code": true,
+        "constructor_visibility_public": true,
+        "description_empty": true,
+        "empty_statement": true,
+        "empty_structure": {
+            "loop": true,
+            "if": true,
+            "while": true,
+            "case": true,
+            "select": true,
+            "do": true,
+            "at": true,
+            "try": true
+        },
+        "exporting": true,
+        "functional_writing": {
+            "ignoreExceptions": true
+        },
+        "global_class": true,
+        "identical_form_names": true,
+        "if_in_if": true,
+        "inline_data_old_versions": true,
+        "line_length": {
+            "length": 120
+        },
+        "max_one_statement": true,
+        "message_exists": true,
+        "method_length": {
+            "statements": 25,
+            "ignoreTestClasses": false,
+            "errorWhenEmpty": true
+        },
+        "mix_returning": true,
+        "msag_consistency": true,
+        "nesting": {
+            "depth": 5
+        },
+        "obsolete_statement": {
+            "refresh": true,
+            "compute": true,
+            "add": true,
+            "subtract": true,
+            "multiply": true,
+            "move": true,
+            "divide": true,
+            "requested": true,
+            "occurs": true,
+            "setExtended": true,
+            "withHeaderLine": true,
+            "fieldSymbolStructure": true
+        },
+        "parser_error": true,
+        "preferred_compare_operator": {
+            "badOperators": [
+                "EQ",
+                "NE",
+                "GE",
+                "GT",
+                "LT",
+                "LE"
+            ]
+        },
+        "short_case": {
+            "length": 1,
+            "allow": []
+        },
+        "superclass_final": true,
+        "unreachable_code": true,
+        "use_new": true,
+        "when_others_last": true,
+        "ambiguous_statement": true,
+        "begin_end_names": true,
+        "check_transformation_exists": true,
+        "form_tables_obsolete": true,
+        "tabl_enhancement_category": true,
+        "implement_methods": true,
+        "local_testclass_location": true,
+        "main_file_contents": true,
+        "rfc_error_handling": true,
+        "indentation": {
+            "alignTryCatch": false,
+            "ignoreExceptions": false,
+            "globalClassSkipFirst": false,
+            "ignoreGlobalClassDefinition": false,
+            "ignoreGlobalInterface": false
+        },
+        "sequential_blank": {
+            "lines": 3
+        },
+        "empty_line_in_statement": {
+            "allowChained": true
+        },
+        "check_abstract": true,
+        "no_public_attributes": {
+            "allowReadOnly": true
+        },
+        "abapdoc": true,
+        "prefer_returning_to_exporting": true,
+        "keep_single_parameter_on_one_line": {
+            "length": 120
+        },
+        "allowed_object_naming": true,
+        "fully_type_constants": true,
+        "check_comments": {
+            "allowEndOfLine": true
+        },
+        "check_text_elements": true,
+        "newline_between_methods": {
+            "logic": "less",
+            "count": 3
+        },
+        "check_include": true,
+        "xml_consistency": true,
+        "prefix_is_current_class": {
+            "omitMeInstanceCalls": true
+        },
+        "check_no_handler_pragma": true,
+        "line_break_multiple_parameters": true,
+        "prefer_inline":false,
+        "reduce_string_templates": true,
+        "sicf_consistency": true,
+        "sql_escape_host_variables": true,
+        "try_without_catch": true,
+        "names_no_dash": true,
+        "unknown_types": false,
+        "unused_variables": true,
+        "unused_types": true,
+        "use_bool_expression": true,
+        "use_line_exists": true,
+        "check_subrc": true,
+        "cyclomatic_complexity": {
+            "max": 6
+        },
+        "parser_missing_space": true,
+        "identical_conditions": true,
+        "prefer_is_not": true,
+        "remove_descriptions": false
     }
-  }
 }

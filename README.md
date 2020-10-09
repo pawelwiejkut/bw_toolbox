@@ -1,7 +1,8 @@
 # BW Toolbox 📊 🔨 📦
 
-[![Build Status](https://travis-ci.com/pawelwiejkut/bw_toolbox.svg?branch=master)](https://travis-ci.com/pawelwiejkut/bw_toolbox) [![abaplint](https://abaplint.org/badges/pawelwiejkut/bw_toolbox)](https://abaplint.org/project/pawelwiejkut/bw_toolbox)
+[![Build Status](https://travis-ci.com/pawelwiejkut/bw_toolbox.svg?branch=master)](https://travis-ci.com/pawelwiejkut/bw_toolbox)
 
+[![YourActionName Actions Status](https://github.com/pawelwiejkut/bw_toolbox/workflows/CI/badge.svg)](https://github.com/pawelwiejkut/bw_toolbox/actions)
 
 Welcome at github BW Toolbox page, fell free to contribute and create pull requests.
 
@@ -9,27 +10,33 @@ Welcome at github BW Toolbox page, fell free to contribute and create pull reque
 
 Inside you can found a special collection of reports, methods and interfaces containing all necessary tools for daily work in SAP BW.
 
-list of reports:
-- ~~remove special charters~~
+-main report with aggregation of usefull standard reports:
+
+![Screenshot](https://i.imgur.com/b3fRaoL.png)
+
+Activate:
+- activate transformation / RSDG_TRFN_ACTIVATE
+- activate data source / RSDS_DATASOURCE_ACTIVATE_ALL
+- activate DTP / RSBKDTPREPAIR
+- activate composite provider RSDG_HCPR_ACTIVATE
+
+Maitenance:
+- change DTP request status / RSBM_GUI_CHANGE_USTATE
+- re-import objects / RSDG_AFTER_IMPORT_FOR_CORR
+- delete process chain variant / based on RSPC_VARIANT_DELETE
+- start process chain / RSPC_API_CHAIN_START
 
 interfaces:
-- ~~start/end/expert rotine interface~~
+- start/end rotine interface
 
-usefull methods for every day development:
+methods for every day development:
 - get end of month
 - check request status
 - check open file authorization
-- ~~get mind of month~~
-
-classes speeds up development:
-- ~~class for ballog handle~~
-
+- check process chain statistics
+- remove whitespace
+- remove newline char
 
 ## How to install
-
 Clone this repository using [ABAP Git](https://github.com/larshp/abapGit)
 
-## ~~Naming convention~~
-
-No longer required, refactor in progress. New requirements described in: [this repo](https://github.com/SAP/styleguides/blob/master/clean-abap/CleanABAP.md)
- 
