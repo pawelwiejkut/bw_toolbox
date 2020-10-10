@@ -27,7 +27,7 @@ Maitenance:
 - start process chain / RSPC_API_CHAIN_START
 
 interfaces:
-- start/end rotine interface
+- start/end/expert routine interface
 
 methods for every day development:
 - get end of month
