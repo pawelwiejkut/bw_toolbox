@@ -29,7 +29,11 @@ PARAMETERS:
   "delete process chain variant zbw_rspc_var_del
   pa_dpvar RADIOBUTTON GROUP rad2,
   "start rspc zbw_rspc_start
-  pa_srsp  RADIOBUTTON GROUP rad2.
+  pa_srsp  RADIOBUTTON GROUP rad2,
+  "drop oh tables zbw_drop_oh_table
+  pa_doh   RADIOBUTTON GROUP rad2,
+  "repair iobj RSDG_IOBJ_REORG
+  pa_rpiob RADIOBUTTON GROUP rad2.
 
 SELECTION-SCREEN END OF SCREEN 102.
 
@@ -72,6 +76,12 @@ END-OF-SELECTION.
 
     ELSEIF pa_srsp = abap_true.
       SUBMIT zbw_rspc_start VIA SELECTION-SCREEN AND RETURN.
+
+    ELSEIF pa_doh = abap_true.
+      SUBMIT zbw_drop_oh_table VIA SELECTION-SCREEN AND RETURN.
+
+    ELSEIF pa_rpiob = abap_true.
+      SUBMIT rsdg_iobj_reorg VIA SELECTION-SCREEN AND RETURN.
 
     ENDIF.
   ENDIF.
