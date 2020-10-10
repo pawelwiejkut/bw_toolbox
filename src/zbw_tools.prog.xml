@@ -60,6 +60,12 @@
     </item>
     <item>
      <ID>S</ID>
+     <KEY>PA_DOH</KEY>
+     <ENTRY>Drop OpenHub Table</ENTRY>
+     <LENGTH>26</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
      <KEY>PA_DPVAR</KEY>
      <ENTRY>Delete Process Chain Variants</ENTRY>
      <LENGTH>37</LENGTH>
@@ -69,6 +75,12 @@
      <KEY>PA_REIMP</KEY>
      <ENTRY>Reimport BW objects</ENTRY>
      <LENGTH>27</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>PA_RPIOB</KEY>
+     <ENTRY>Repair InfoObject</ENTRY>
+     <LENGTH>25</LENGTH>
     </item>
     <item>
      <ID>S</ID>
