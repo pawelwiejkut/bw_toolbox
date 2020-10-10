@@ -25,6 +25,8 @@ Maitenance:
 - re-import objects / RSDG_AFTER_IMPORT_FOR_CORR
 - delete process chain variant / based on RSPC_VARIANT_DELETE
 - start process chain / RSPC_API_CHAIN_START
+- drop openhub tables / based on DB_DROP_TABLE
+- repair infoobjects / based on RSDG_IOBJ_REORG
 
 interfaces:
 - start/end/expert routine interface
