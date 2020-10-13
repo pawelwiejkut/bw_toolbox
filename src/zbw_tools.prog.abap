@@ -33,7 +33,9 @@ PARAMETERS:
   "drop oh tables zbw_drop_oh_table
   pa_doh   RADIOBUTTON GROUP rad2,
   "repair iobj RSDG_IOBJ_REORG
-  pa_rpiob RADIOBUTTON GROUP rad2.
+  pa_rpiob RADIOBUTTON GROUP rad2,
+  "change rspc status based on RSPC_PROCESS_FINISH
+  pa_crsp  RADIOBUTTON GROUP rad2.
 
 SELECTION-SCREEN END OF SCREEN 102.
 
@@ -82,6 +84,9 @@ END-OF-SELECTION.
 
     ELSEIF pa_rpiob = abap_true.
       SUBMIT rsdg_iobj_reorg VIA SELECTION-SCREEN AND RETURN.
+
+    ELSEIF pa_crsp = abap_true.
+      SUBMIT zbw_rspc_stat_chg VIA SELECTION-SCREEN AND RETURN.
 
     ENDIF.
   ENDIF.
