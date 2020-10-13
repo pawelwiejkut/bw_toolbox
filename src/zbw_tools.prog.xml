@@ -60,6 +60,12 @@
     </item>
     <item>
      <ID>S</ID>
+     <KEY>PA_CRSP</KEY>
+     <ENTRY>Change Process Chain status</ENTRY>
+     <LENGTH>35</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
      <KEY>PA_DOH</KEY>
      <ENTRY>Drop OpenHub Table</ENTRY>
      <LENGTH>26</LENGTH>
