@@ -25,6 +25,7 @@ Maitenance:
 - start process chain / RSPC_API_CHAIN_START
 - drop openhub tables / based on DB_DROP_TABLE
 - repair infoobjects / RSDG_IOBJ_REORG
+- process chain variant status change / based on RSPC_PROCESS_FINISH
 
 interfaces:
 - start/end/expert routine interface
