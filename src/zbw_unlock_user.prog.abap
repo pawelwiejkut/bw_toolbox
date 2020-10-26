@@ -21,9 +21,9 @@ select single uflag
  where bname = @p_user.
 
 if sy-subrc = 0 and lv_uflag = 128.
-    call function 'BAPI_USER_UNLOCK'
-      exporting
-        username = p_user
-      tables
-        return   = lt_return.
+  call function 'BAPI_USER_UNLOCK'
+    exporting
+      username = p_user
+    tables
+      return   = lt_return.
 endif.
