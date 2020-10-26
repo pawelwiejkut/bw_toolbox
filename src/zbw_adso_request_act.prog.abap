@@ -12,7 +12,7 @@
 **********************************************************************
 REPORT zbw_adso_request_act.
 
-SELECTION-SCREEN: BEGIN OF BLOCK b1 WITH FRAME TITLE TEXT-001.
+SELECTION-SCREEN: BEGIN OF BLOCK b1 WITH FRAME.
 PARAMETERS:       p_adso TYPE rsoadsonm.
 SELECTION-SCREEN: END OF BLOCK b1.
 
