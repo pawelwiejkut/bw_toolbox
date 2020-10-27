@@ -15,7 +15,9 @@ PARAMETERS: "activate TRFN RSDG_TRFN_ACTIVATE
   "activate DTP RSBKDTPREPAIR
   pa_adtp RADIOBUTTON GROUP rad1,
   "activate HCPR RSDG_HCPR_ACTIVATE
-  pa_ahcp RADIOBUTTON GROUP rad1.
+  pa_ahcp RADIOBUTTON GROUP rad1,
+  "activate all ADSO requests
+  pa_adso RADIOBUTTON GROUP rad1.
 
 SELECTION-SCREEN END OF SCREEN 101.
 
@@ -35,7 +37,9 @@ PARAMETERS:
   "repair iobj RSDG_IOBJ_REORG
   pa_rpiob RADIOBUTTON GROUP rad2,
   "change rspc status based on RSPC_PROCESS_FINISH
-  pa_crsp  RADIOBUTTON GROUP rad2.
+  pa_crsp  RADIOBUTTON GROUP rad2,
+  "Unlock User
+  pa_user  RADIOBUTTON GROUP rad2.
 
 SELECTION-SCREEN END OF SCREEN 102.
 
@@ -63,7 +67,8 @@ END-OF-SELECTION.
 
     ELSEIF pa_ahcp = abap_true.
       SUBMIT rsdg_hcpr_activate VIA SELECTION-SCREEN AND RETURN.
-
+    ELSEIF pa_adso = abap_true.
+      SUBMIT zbw_adso_request_act VIA SELECTION-SCREEN AND RETURN.
     ENDIF.
   ELSEIF t1-activetab = 'UCOMM2'.
 
@@ -87,6 +92,7 @@ END-OF-SELECTION.
 
     ELSEIF pa_crsp = abap_true.
       SUBMIT zbw_rspc_stat_chg VIA SELECTION-SCREEN AND RETURN.
-
+    ELSEIF pa_user = abap_true.
+      SUBMIT zbw_unlock_user VIA SELECTION-SCREEN AND RETURN.
     ENDIF.
   ENDIF.

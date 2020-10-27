@@ -30,6 +30,12 @@
     </item>
     <item>
      <ID>S</ID>
+     <KEY>PA_ADSO</KEY>
+     <ENTRY>Activate all ADSO Requests</ENTRY>
+     <LENGTH>34</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
      <KEY>PA_ADTP</KEY>
      <ENTRY>Activate DTP</ENTRY>
      <LENGTH>20</LENGTH>
@@ -93,6 +99,12 @@
      <KEY>PA_SRSP</KEY>
      <ENTRY>Start Process Chain</ENTRY>
      <LENGTH>27</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>PA_USER</KEY>
+     <ENTRY>Unlock User</ENTRY>
+     <LENGTH>19</LENGTH>
     </item>
    </TPOOL>
   </asx:values>
