@@ -39,7 +39,15 @@ PARAMETERS:
   "change rspc status based on RSPC_PROCESS_FINISH
   pa_crsp  RADIOBUTTON GROUP rad2,
   "Unlock User
-  pa_user  RADIOBUTTON GROUP rad2.
+  pa_user  RADIOBUTTON GROUP rad2,
+  "DTP execution
+  pa_dtp  RADIOBUTTON GROUP rad2,
+  "Check transformation --> RSDHA_SUPPORT = 'x'
+  pa_trans  RADIOBUTTON GROUP rad2,
+  "Datasources
+  pa_ds  RADIOBUTTON GROUP rad2,
+  "Composite Providers
+  pa_hcpr RADIOBUTTON GROUP rad2.
 
 SELECTION-SCREEN END OF SCREEN 102.
 
@@ -94,5 +102,18 @@ END-OF-SELECTION.
       SUBMIT zbw_rspc_stat_chg VIA SELECTION-SCREEN AND RETURN.
     ELSEIF pa_user = abap_true.
       SUBMIT zbw_unlock_user VIA SELECTION-SCREEN AND RETURN.
+	  
+    ELSEIF pa_dtp = abap_true.
+      SUBMIT RSBK0001 VIA SELECTION-SCREEN AND RETURN.
+
+    ELSEIF pa_trans = abap_true.
+      SUBMIT RSTRAN_GUI_START VIA SELECTION-SCREEN AND RETURN.
+
+    ELSEIF pa_ds = abap_true.
+      CALL Transaction 'RSDS'.
+
+    ELSEIF pa_hcpr = abap_true.
+      CALL Transaction 'RSOADSO'.
+	  
     ENDIF.
   ENDIF.
