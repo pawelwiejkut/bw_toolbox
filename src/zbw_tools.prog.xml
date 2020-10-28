@@ -84,24 +84,6 @@
     </item>
     <item>
      <ID>S</ID>
-	 <KEY>PA_DS</KEY>
-     <ENTRY>Datasources the classic way</ENTRY>
-     <LENGTH>35</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>PA_DTP</KEY>
-     <ENTRY>Execute DTP the classic way</ENTRY>
-     <LENGTH>35</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>PA_HCPR</KEY>
-     <ENTRY>InfoProviders the classic way</ENTRY>
-     <LENGTH>37</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
      <KEY>PA_REIMP</KEY>
      <ENTRY>Reimport BW objects</ENTRY>
      <LENGTH>27</LENGTH>
@@ -117,12 +99,6 @@
      <KEY>PA_SRSP</KEY>
      <ENTRY>Start Process Chain</ENTRY>
      <LENGTH>27</LENGTH>
-	 </item>
-    <item>
-     <ID>S</ID>
-     <KEY>PA_TRANS</KEY>
-     <ENTRY>Transformation the classic way</ENTRY>
-     <LENGTH>38</LENGTH>
     </item>
     <item>
      <ID>S</ID>
