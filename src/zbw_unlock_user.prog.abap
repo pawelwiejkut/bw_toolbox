@@ -11,19 +11,30 @@
 **********************************************************************
 REPORT zbw_unlock_user.
 
-parameters: p_user type xubname obligatory.
+PARAMETERS: p_user TYPE usr02-bname OBLIGATORY.
 
-data: lt_return type table of bapiret2.
+DATA: lt_return   TYPE TABLE OF bapiret2,
+      lv_username TYPE xubname.
 
-select single uflag
-  from usr02
-  into @data(lv_uflag)
- where bname = @p_user.
+SELECT SINGLE uflag
+  FROM usr02
+  INTO @DATA(lv_uflag)
+ WHERE bname = @p_user.
 
-if sy-subrc = 0 and lv_uflag = 128.
-  call function 'BAPI_USER_UNLOCK'
-    exporting
-      username = p_user
-    tables
+IF sy-subrc = 0 AND lv_uflag = 128.
+
+  lv_username = p_user.
+
+  CALL FUNCTION 'BAPI_USER_UNLOCK'
+    EXPORTING
+      username = lv_username
+    TABLES
       return   = lt_return.
-endif.
+
+  LOOP AT lt_return REFERENCE INTO DATA(lr_return).
+    MESSAGE lr_return->message TYPE lr_return->type.
+  ENDLOOP.
+
+ELSE.
+  MESSAGE 'User not locked due to incorrect logins' TYPE 'I'.
+ENDIF.

@@ -38,27 +38,36 @@ PARAMETERS:
   pa_rpiob RADIOBUTTON GROUP rad2,
   "change rspc status based on RSPC_PROCESS_FINISH
   pa_crsp  RADIOBUTTON GROUP rad2,
-  "Unlock User
-  pa_user  RADIOBUTTON GROUP rad2,
-  "DTP execution
-  pa_dtp  RADIOBUTTON GROUP rad2,
-  "Check transformation --> RSDHA_SUPPORT = 'x'
-  pa_trans  RADIOBUTTON GROUP rad2,
-  "Datasources
-  pa_ds  RADIOBUTTON GROUP rad2,
-  "Composite Providers
-  pa_hcpr RADIOBUTTON GROUP rad2.
+  "Unlock User based on BAPI_USER_UNLOCK
+  pa_user  RADIOBUTTON GROUP rad2.
 
 SELECTION-SCREEN END OF SCREEN 102.
+
+SELECTION-SCREEN BEGIN OF SCREEN 103 AS SUBSCREEN.
+
+PARAMETERS:
+  "DTP execution based on rsbk0001
+  pa_dtp   RADIOBUTTON GROUP rad3,
+  "Check transformation based on rstran_gui_start
+  pa_trans RADIOBUTTON GROUP rad3,
+  "Data sources based on transaction RSDS
+  pa_ds    RADIOBUTTON GROUP rad3,
+  "Composite Providers based on RSOADSO
+  pa_hcpr  RADIOBUTTON GROUP rad3.
+
+SELECTION-SCREEN END OF SCREEN 103.
 
 SELECTION-SCREEN BEGIN OF TABBED BLOCK t1 FOR 20 LINES.
 SELECTION-SCREEN TAB (20) tab1 USER-COMMAND ucomm1 DEFAULT SCREEN 101.
 SELECTION-SCREEN TAB (20) tab2 USER-COMMAND ucomm2 DEFAULT SCREEN 102.
+SELECTION-SCREEN TAB (20) tab3 USER-COMMAND ucomm3 DEFAULT SCREEN 103.
+
 SELECTION-SCREEN END OF BLOCK t1.
 
 INITIALIZATION.
   tab1 = TEXT-001.
   tab2 = TEXT-002.
+  tab3 = TEXT-003.
 
 END-OF-SELECTION.
 
@@ -100,20 +109,24 @@ END-OF-SELECTION.
 
     ELSEIF pa_crsp = abap_true.
       SUBMIT zbw_rspc_stat_chg VIA SELECTION-SCREEN AND RETURN.
+
     ELSEIF pa_user = abap_true.
       SUBMIT zbw_unlock_user VIA SELECTION-SCREEN AND RETURN.
-	  
-    ELSEIF pa_dtp = abap_true.
-      SUBMIT RSBK0001 VIA SELECTION-SCREEN AND RETURN.
+    ENDIF.
+
+  ELSEIF t1-activetab = 'UCOMM3'.
+
+    IF pa_dtp = abap_true.
+      SUBMIT rsbk0001 VIA SELECTION-SCREEN AND RETURN.
 
     ELSEIF pa_trans = abap_true.
-      SUBMIT RSTRAN_GUI_START VIA SELECTION-SCREEN AND RETURN.
+      SUBMIT rstran_gui_start VIA SELECTION-SCREEN AND RETURN.
 
     ELSEIF pa_ds = abap_true.
-      CALL Transaction 'RSDS'.
+      CALL TRANSACTION 'RSDS'.
 
     ELSEIF pa_hcpr = abap_true.
-      CALL Transaction 'RSOADSO'.
-	  
+      CALL TRANSACTION 'RSOADSO'.
+
     ENDIF.
   ENDIF.

@@ -24,6 +24,12 @@
      <LENGTH>20</LENGTH>
     </item>
     <item>
+     <ID>I</ID>
+     <KEY>003</KEY>
+     <ENTRY>Classic view</ENTRY>
+     <LENGTH>21</LENGTH>
+    </item>
+    <item>
      <ID>R</ID>
      <ENTRY>BW Tools</ENTRY>
      <LENGTH>8</LENGTH>
@@ -84,20 +90,20 @@
     </item>
     <item>
      <ID>S</ID>
-	 <KEY>PA_DS</KEY>
-     <ENTRY>Datasources the classic way</ENTRY>
+     <KEY>PA_DS</KEY>
+     <ENTRY>Datasources</ENTRY>
      <LENGTH>35</LENGTH>
     </item>
     <item>
      <ID>S</ID>
      <KEY>PA_DTP</KEY>
-     <ENTRY>Execute DTP the classic way</ENTRY>
+     <ENTRY>DTP</ENTRY>
      <LENGTH>35</LENGTH>
     </item>
     <item>
      <ID>S</ID>
      <KEY>PA_HCPR</KEY>
-     <ENTRY>InfoProviders the classic way</ENTRY>
+     <ENTRY>InfoProviders</ENTRY>
      <LENGTH>37</LENGTH>
     </item>
     <item>
@@ -117,11 +123,11 @@
      <KEY>PA_SRSP</KEY>
      <ENTRY>Start Process Chain</ENTRY>
      <LENGTH>27</LENGTH>
-	 </item>
+    </item>
     <item>
      <ID>S</ID>
      <KEY>PA_TRANS</KEY>
-     <ENTRY>Transformation the classic way</ENTRY>
+     <ENTRY>Transformation</ENTRY>
      <LENGTH>38</LENGTH>
     </item>
     <item>
