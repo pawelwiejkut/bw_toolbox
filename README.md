@@ -10,7 +10,7 @@ Inside you can found a special collection of reports, methods and interfaces con
 
 -main report with aggregation of usefull standard reports:
 
-![Screenshot](https://i.imgur.com/b3fRaoL.png)
+![Screenshot](https://i.imgur.com/hkBg7FU.png)
 
 Activate:
 - activate transformation / RSDG_TRFN_ACTIVATE
