@@ -26,6 +26,13 @@ Maitenance:
 - drop openhub tables / based on DB_DROP_TABLE
 - repair infoobjects / RSDG_IOBJ_REORG
 - process chain variant status change / based on RSPC_PROCESS_FINISH
+- unlock user / based on BAPI_USER_UNLOCK
+
+Classic view:
+- DTP / rsbk0001
+- Transformation / rstran_gui_start
+- Datasource / transaction RSDS
+- Infoprovider / transaction RSOADSO
 
 interfaces:
 - start/end/expert routine interface
