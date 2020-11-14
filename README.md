@@ -17,6 +17,7 @@ Activate:
 - activate data source / RSDS_DATASOURCE_ACTIVATE_ALL
 - activate DTP / RSBKDTPREPAIR
 - activate composite provider RSDG_HCPR_ACTIVATE
+- activate infocube / RSDG_CUBE_ACTIVATE
 
 Maitenance:
 - change DTP request status / RSBM_GUI_CHANGE_USTATE
