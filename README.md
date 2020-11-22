@@ -51,5 +51,5 @@ Clone this repository using [ABAP Git](https://github.com/larshp/abapGit)
 
 ## How to contribute ?
 
-Please check [This link](https://pawelwiejkut.net/how-to-contribute-abap-projects-on-github/) or contribution page.
+Please check [this link](https://pawelwiejkut.net/how-to-contribute-abap-projects-on-github/) or contribution page.
 
