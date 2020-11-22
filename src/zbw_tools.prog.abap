@@ -16,7 +16,7 @@ PARAMETERS: "activate TRFN RSDG_TRFN_ACTIVATE
   pa_adtp RADIOBUTTON GROUP rad1,
   "activate HCPR RSDG_HCPR_ACTIVATE
   pa_ahcp RADIOBUTTON GROUP rad1,
-  "activate all ADSO requests
+  "activate all ADSO requests cl_rsdso_activate_api
   pa_adso RADIOBUTTON GROUP rad1.
 
 SELECTION-SCREEN END OF SCREEN 101.
